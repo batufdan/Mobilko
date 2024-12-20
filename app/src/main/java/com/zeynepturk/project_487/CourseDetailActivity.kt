@@ -21,6 +21,6 @@ class CourseDetailActivity : AppCompatActivity() {
 
         // commit 2
 
-        // commit 3
+        //Bıktım
     }
 }
