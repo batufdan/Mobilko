@@ -28,5 +28,7 @@ class CourseDetailActivity : AppCompatActivity() {
         // commit asd
 
         // commit final
+
+        //commit duru
     }
 }
