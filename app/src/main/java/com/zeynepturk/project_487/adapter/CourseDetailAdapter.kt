@@ -27,10 +27,10 @@ class CourseDetailAdapter(private val courseDetails: List<Courses>):
         inner class CourseDetailViewHolder(private val binding: ActivityCourseDetailBinding) :
             RecyclerView.ViewHolder(binding.root) {
             fun bind(courseDetail: CoursesTaken) {
-                binding.courseCode.text = courseDetail.coursesTaken
+                binding.courseCode.text = courseDetail.coursesCode
                 binding.courseName.text = courseDetail.stuID.toString()
-                binding.attendance.text = courseDetail.attendance
-                binding.grade.text = courseDetail.courseGrade
+                binding.attendance.text = courseDetail.attendance.toString()
+                binding.grade.text = courseDetail.courseGrade.toString()
             }
         }
     }
