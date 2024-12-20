@@ -7,12 +7,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "courses")
 class Courses(
     @PrimaryKey(autoGenerate = true)
-    var instructorID: Int,
-    @ColumnInfo(name = "CourseCode")
     var courseCode: String,
-    @ColumnInfo(name = "CourseName")
     var courseName: String,
-    @ColumnInfo(name = "CourseExamDate")
-    var crsExamDate: String,
+    var instructorId: Int,
+    var crsExamDate: String
 ) {
 }

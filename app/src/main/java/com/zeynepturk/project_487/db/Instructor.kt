@@ -10,6 +10,6 @@ class Instructor(
     var instructorName: String,
     var instructorOfficeHour: String,
     var isTaken: String,
-    var instructorMail: String,
+    var instructorMail: String
 ) {
 }

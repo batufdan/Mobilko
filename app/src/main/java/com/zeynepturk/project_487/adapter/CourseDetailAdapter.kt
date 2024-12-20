@@ -3,7 +3,6 @@ package com.zeynepturk.project_487.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.zeynepturk.project_487.adapter.CourseDetailAdapter.CourseDetailAdapter
 import com.zeynepturk.project_487.databinding.ActivityCourseDetailBinding
 import com.zeynepturk.project_487.db.Courses
 import com.zeynepturk.project_487.db.CoursesTaken

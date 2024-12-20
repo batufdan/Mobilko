@@ -9,12 +9,9 @@ import androidx.room.PrimaryKey
 class Student(
     @PrimaryKey(autoGenerate = true)
                var id: Int = 0,
-               @ColumnInfo(name = "StudentName")
-               var name: String,
-               @ColumnInfo(name = "StudentPassword")
                var pass: String,
-               @ColumnInfo(name = "StudentMail")
-               var mail: String,
+               var name: String,
+               var mail: String
 ){
 
 }
