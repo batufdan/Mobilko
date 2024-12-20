@@ -16,5 +16,7 @@ class CourseDetailActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // deneme commit 1
     }
 }
