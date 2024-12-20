@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Project_487</string>
+    <string name="student_info">Student Info</string>
+    <string name="student_info_text">Name: John Doe\nID: 123456\nEmail: john.doe@university.com</string>
+    <string name="course_table">Course Table</string>
+    <string name="office_hour">Office Hour</string>
+    <string name="meal">Meal</string>
+    <string name="exam_schedule">Exam Schedule</string>
+    <string name="course_code">Course Code:</string>
+    <string name="course_name">Course Name:</string>
+    <string name="attendance">Attendance:</string>
+    <string name="grade">Grade:</string>
+    <string name="instructor">Instructor:</string>
+    <string name="select_office_hour">Select Office Hour</string>
+    <string name="exam_schedules">Exam Schedule</string>
+    <string name="account_entry">Bilkent University Account Entry</string>
+    <string name="enter_student_id">Enter Student ID</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login">Login</string>
+    <string name="enter_verification_code">Enter Verification Code</string>
+    <string name="verification_code">Verification Code</string>
+    <string name="verify">Verify</string>
+</resources>

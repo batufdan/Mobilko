@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+                <!-- Student Info Section -->
+                <TextView
+                    android:id="@+id/studentInfoTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/student_info"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="8dp" />
+
+                <TextView
+                    android:id="@+id/studentInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/student_info_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:background="@android:color/white"
+                    android:elevation="4dp"
+                    android:padding="12dp"
+                    android:marginBottom="16dp" />
+
+                <!-- Course Table Section -->
+                <TextView
+                    android:id="@+id/courseTableTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/course_table"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:paddingBottom="8dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/courseTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:elevation="4dp"
+                    android:padding="8dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Navigation Buttons Section -->
+
+                <Button
+                    android:id="@+id/officeHourButton"
+                    android:layout_width="187dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#1FBFD4"
+                    android:text="@string/office_hour"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/mealButton"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#A61CBE"
+                    android:text="@string/meal"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/examScheduleButton"
+                    android:layout_width="191dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="#E7D425"
+                    android:text="@string/exam_schedule"
+                    android:textStyle="bold" />
+
+        </LinearLayout>
+</ScrollView>
