@@ -3,9 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context=".MainActivity">
 
         <LinearLayout
+            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -16,44 +18,43 @@
                     android:id="@+id/studentInfoTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
                     android:text="@string/student_info"
                     android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:paddingBottom="8dp" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/studentInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/student_info_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
                     android:background="@android:color/white"
                     android:elevation="4dp"
+                    android:layout_marginBottom="16dp"
                     android:padding="12dp"
-                    android:marginBottom="16dp" />
+                    android:text="@string/student_info_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <!-- Course Table Section -->
                 <TextView
                     android:id="@+id/courseTableTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
                     android:text="@string/course_table"
                     android:textSize="22sp"
-                    android:textStyle="bold"
-                    android:paddingBottom="8dp" />
+                    android:textStyle="bold" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/courseTable"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
                     android:background="@android:color/white"
                     android:elevation="4dp"
-                    android:padding="8dp"
-                    android:layout_marginBottom="16dp" />
+                    android:padding="8dp" />
 
                 <!-- Navigation Buttons Section -->
-
                 <Button
                     android:id="@+id/officeHourButton"
                     android:layout_width="187dp"

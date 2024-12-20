@@ -4,8 +4,13 @@ plugins {
 }
 
 android {
+
+    buildFeatures{
+        viewBinding = true
+    }
+
     namespace = "com.zeynepturk.project_487"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.zeynepturk.project_487"
