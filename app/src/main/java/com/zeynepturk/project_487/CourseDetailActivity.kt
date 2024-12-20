@@ -18,5 +18,7 @@ class CourseDetailActivity : AppCompatActivity() {
         }
 
         // deneme commit 1
+
+        // commit 2
     }
 }
