@@ -51,6 +51,26 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.10.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    //Picasso library to get images from server with https protocol
+    implementation ( "com.squareup.picasso:picasso:2.8")
+
+    //For Glide library to get images from server with https protocol
+    implementation ("com.github.bumptech.glide:glide:4.14.2")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.14.2")
+
+    //STEP1: Include retrofit and converter
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+
+    // Gson Converter
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
     val room_version = "2.6.0"
     //this part for room database runtime applications compiler applications
     implementation("androidx.room:room-runtime:$room_version")

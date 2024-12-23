@@ -12,5 +12,8 @@ class Student(
     var mail: String,
     var cgpa: Double
 ){
-
+    companion object{
+        const val TYPE_SUCCESSFUL = 100
+        const val TYPE_UNSUCCESSFUL = 200
+    }
 }

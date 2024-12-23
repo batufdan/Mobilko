@@ -40,7 +40,7 @@
             android:name=".CourseDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".StudentMainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
