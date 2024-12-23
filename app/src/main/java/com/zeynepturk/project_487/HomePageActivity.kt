@@ -2,6 +2,7 @@ package com.zeynepturk.project_487
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -100,5 +101,6 @@ class HomePageActivity : AppCompatActivity() {
     private fun getData(){
         mobilkoDB.studentDao().insertAllStudent(students)
         mobilkoDB.adminDao().insertAllAdmin(admins)
+
     }
 }

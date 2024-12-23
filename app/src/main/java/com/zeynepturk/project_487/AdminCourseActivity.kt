@@ -7,8 +7,6 @@ import android.text.TextWatcher
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zeynepturk.project_487.adapter.CustomAdminCourseRecyclerViewAdapter
@@ -31,14 +29,30 @@ class AdminCourseActivity : AppCompatActivity() {
         bindingAdminCourse = ActivityAdminCourseBinding.inflate(layoutInflater)
         setContentView(bindingAdminCourse.root)
 
-        courseAdapter = CustomAdminCourseRecyclerViewAdapter(courseList)
-        bindingAdminCourse.courseList.apply {
-            layoutManager = LinearLayoutManager(this@AdminCourseActivity)
-            adapter = courseAdapter
+        /*
+
+        courseAdapter = CustomAdminCourseRecyclerViewAdapter(this)
+        bindingAdminCourse.courseList.setLayoutManager(LinearLayoutManager(this))
+        bindingAdminCourse.courseList.adapter = courseAdapter
+
+         */
+
+
+        //courseViewModel = ViewModelProvider(this).get(AdminCourseViewModel::class.java)
+
+
+        /*
+        courseViewModel.readAllData.observe(this) { courses ->
+            courseAdapter.setData(courses)
         }
 
+         */
 
-        courseViewModel = ViewModelProvider(this).get(AdminCourseViewModel::class.java)
+
+
+
+
+        /*
 
         bindingAdminCourse.search.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -50,39 +64,40 @@ class AdminCourseActivity : AppCompatActivity() {
 
         })
 
+         */
+
+
         bindingAdminCourse.addCourseBtn.setOnClickListener {
             showAddCourseDialog()
         }
 
+
+
     }
 
-    private fun filterCourses(key: String) {
-        val filteredList = if (key.isNotEmpty()) {
-            courseList.filter { it.courseName.contains(key, ignoreCase = true) }
-        } else {
-            courseList
-        }
-        courseAdapter.updateList(filteredList)
-    }
+
 
     private fun showAddCourseDialog(){
         val dialogBinding = DialogCourseAddBinding.inflate(layoutInflater)
         val dialog = Dialog(this)
         dialog.setContentView(dialogBinding.root)
-        dialog.setCancelable(true)
 
         dialogBinding.btnAdd.setOnClickListener {
             val courseName = dialogBinding.courseNameEdit.text.toString()
             val courseCode = dialogBinding.courseCodeEdit.text.toString()
-            val instructor = dialogBinding.instructorEdit.text.toString()
+            val instructorName = dialogBinding.instructorEdit.text.toString()
 
-            if (courseName.isNotBlank() && courseCode.isNotBlank() && instructor.isNotBlank()) {
-                val newCourse = Courses(courseCode, courseName, instructor)
-                courseViewModel.addCourse(newCourse)
-                Toast.makeText(this, "Course Added: $courseName", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
+            if (courseName.isEmpty() || courseCode.isEmpty() || instructorName.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields!", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
+                val newCourse = Courses(courseCode, courseName, instructorName)
+                courseViewModel.addCourse(newCourse)
+                courseViewModel.readAllData.observe(this) { courses ->
+                    courseAdapter.setData(courses)
+                }
+
+                Toast.makeText(this, "Course added successfully!", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
             }
         }
 
@@ -93,5 +108,4 @@ class AdminCourseActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    //commit
 }

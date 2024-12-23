@@ -24,7 +24,7 @@
         android:id="@+id/addCourseBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="41dp"
+        android:layout_marginEnd="140dp"
         android:layout_marginBottom="1dp"
         android:text="Add Course"
         app:layout_constraintBottom_toTopOf="@+id/courseList"
@@ -42,4 +42,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addCourseBtn" />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="1dp"
+        android:text="Update"
+        app:layout_constraintBottom_toTopOf="@+id/courseList"
+        app:layout_constraintEnd_toEndOf="@+id/courseList" />
 </androidx.constraintlayout.widget.ConstraintLayout>

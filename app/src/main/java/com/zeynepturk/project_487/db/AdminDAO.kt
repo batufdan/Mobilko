@@ -4,8 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import com.zeynepturk.project_487.model.Admin
-import com.zeynepturk.project_487.model.Courses
-import com.zeynepturk.project_487.model.Student
+
 
 @Dao
 interface AdminDAO {
