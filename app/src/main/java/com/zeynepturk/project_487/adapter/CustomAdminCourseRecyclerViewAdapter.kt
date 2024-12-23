@@ -4,17 +4,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.zeynepturk.project_487.R
 import com.zeynepturk.project_487.model.Courses
 
-class CustomAdminCourseRecyclerViewAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var recyclerItemValues = emptyList<Courses>()
-    private var allCourses = mutableListOf<Courses>()
-
-    fun setData(items: List<Courses>) {
-        recyclerItemValues = items
+class CustomAdminCourseRecyclerViewAdapter(private val context: Context, private val courses: MutableList<Courses> = mutableListOf(),  private val onEditClicked: (Courses) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    fun setData(newCourses: List<Courses>) {
+        courses.clear()
+        courses.addAll(newCourses)
         notifyDataSetChanged()
     }
 
@@ -25,38 +25,39 @@ class CustomAdminCourseRecyclerViewAdapter(private val context: Context) : Recyc
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val course = recyclerItemValues[position]
-        if (holder is CourseViewHolder) { // Cast holder to CourseViewHolder
+        val course = courses[position]
+        if (holder is CourseViewHolder) {
             holder.courseCode.text = course.courseCode
             holder.courseName.text = course.courseName
+            holder.courseInstructor.text = course.instructorName
+
+            holder.fabUpdate.setOnClickListener {
+                onEditClicked(course)
+            }
         }
     }
 
 
-    override fun getItemCount(): Int = recyclerItemValues.size
+    override fun getItemCount(): Int = courses.size
 
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val courseCode: TextView = itemView.findViewById(R.id.courseCode)
-        val courseName: TextView = itemView.findViewById(R.id.courseName)
+        val courseName: TextView = itemView.findViewById(R.id.tvcourseName)
+        val courseInstructor: TextView = itemView.findViewById(R.id.tvInstructor)
+        val fabUpdate: FloatingActionButton = itemView.findViewById(R.id.fabUpdate)
     }
 
     fun addCourse(course: Courses) {
-        allCourses.add(course)
-        notifyItemInserted(allCourses.size - 1)
-    }
-
-    fun updateList(newCourses: List<Courses>) {
-        allCourses.clear() // Clear the existing list
-        allCourses.addAll(newCourses) // Add all items from the new list
-        notifyDataSetChanged() // Notify the adapter about data changes
+        courses.add(course)
+        notifyItemInserted(courses.size - 1)
     }
 
 
     fun updateCourse(course: Courses) {
-        val index = allCourses.indexOfFirst { it.courseName == course.courseName }
+        val index = courses.indexOfFirst { it.courseCode == course.courseCode }
         if (index != -1) {
-            allCourses[index] = course
+            courses[index] = course
             notifyItemChanged(index)
         }
     }

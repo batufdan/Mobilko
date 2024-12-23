@@ -29,13 +29,13 @@ class AdminCourseViewModel(application: Application): AndroidViewModel(applicati
     }
 
     fun addCourse(course: Courses) {
-        viewModelScope.launch(Dispatchers.IO) { // that code will be run in background thread, coroutine scope
+        viewModelScope.launch(Dispatchers.IO) {
             courseDAO.insertCourse(course)
         }
     }
 
     fun addCourses(courses: List<Courses>) {
-        viewModelScope.launch(Dispatchers.IO) { // that code will be run in background thread, coroutine scope
+        viewModelScope.launch(Dispatchers.IO) {
             courses.forEach {
                 courseDAO.insertCourse(it)
             }
@@ -43,7 +43,7 @@ class AdminCourseViewModel(application: Application): AndroidViewModel(applicati
     }
 
     fun deleteCourse(course: Courses, onResult: (Int) -> Unit) {
-        viewModelScope.launch(Dispatchers.IO) { // that code will be run in background thread, coroutine scope
+        viewModelScope.launch(Dispatchers.IO) {
             val numberOfDeletedRecords = courseDAO.deleteCourse(course)
             withContext(Dispatchers.Main) {
                 onResult(numberOfDeletedRecords)
@@ -53,7 +53,7 @@ class AdminCourseViewModel(application: Application): AndroidViewModel(applicati
 
 
     fun updateCourse(course: Courses, onResult: (Int) -> Unit) {
-        viewModelScope.launch(Dispatchers.IO) { // that code will be run in background thread, coroutine scope
+        viewModelScope.launch(Dispatchers.IO) {
             val numberOfUpdatedRecords = courseDAO.updateCourse(course)
             withContext(Dispatchers.Main) {
                 onResult(numberOfUpdatedRecords)

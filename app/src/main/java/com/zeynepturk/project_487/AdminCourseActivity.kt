@@ -12,15 +12,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zeynepturk.project_487.adapter.CustomAdminCourseRecyclerViewAdapter
 import com.zeynepturk.project_487.databinding.ActivityAdminCourseBinding
 import com.zeynepturk.project_487.databinding.DialogCourseAddBinding
+import com.zeynepturk.project_487.databinding.DialogCourseUpdateBinding
 import com.zeynepturk.project_487.db.AdminCourseViewModel
+import com.zeynepturk.project_487.model.Admin
 import com.zeynepturk.project_487.model.Courses
+import com.zeynepturk.project_487.model.Student
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.Collections
 
 class AdminCourseActivity : AppCompatActivity() {
     lateinit var bindingAdminCourse: ActivityAdminCourseBinding
-    private val courseList = mutableListOf<Courses>()
-    private lateinit var courseAdapter: CustomAdminCourseRecyclerViewAdapter
-    private lateinit var courseViewModel: AdminCourseViewModel
-
+    lateinit var courseAdapter: CustomAdminCourseRecyclerViewAdapter
+    lateinit var courseViewModel: AdminCourseViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,30 +34,23 @@ class AdminCourseActivity : AppCompatActivity() {
         bindingAdminCourse = ActivityAdminCourseBinding.inflate(layoutInflater)
         setContentView(bindingAdminCourse.root)
 
-        /*
-
-        courseAdapter = CustomAdminCourseRecyclerViewAdapter(this)
-        bindingAdminCourse.courseList.setLayoutManager(LinearLayoutManager(this))
+        courseAdapter = CustomAdminCourseRecyclerViewAdapter(this, mutableListOf()) { course ->
+            showUpdateInstructorDialog(course)
+        }
+        bindingAdminCourse.courseList.layoutManager = LinearLayoutManager(this)
         bindingAdminCourse.courseList.adapter = courseAdapter
 
-         */
+        courseViewModel = ViewModelProvider(this).get(AdminCourseViewModel::class.java)
+
+        prepareData()
 
 
-        //courseViewModel = ViewModelProvider(this).get(AdminCourseViewModel::class.java)
-
-
-        /*
         courseViewModel.readAllData.observe(this) { courses ->
             courseAdapter.setData(courses)
         }
 
-         */
 
 
-
-
-
-        /*
 
         bindingAdminCourse.search.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -63,8 +61,6 @@ class AdminCourseActivity : AppCompatActivity() {
                 filterCourses(key.toString())            }
 
         })
-
-         */
 
 
         bindingAdminCourse.addCourseBtn.setOnClickListener {
@@ -106,6 +102,73 @@ class AdminCourseActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+
+    private fun filterCourses(query: String) {
+        courseViewModel.readAllData.observe(this) { courses ->
+            if (query.isEmpty()) {
+                courseAdapter.setData(courses)
+            } else {
+                val filteredCourses = courses.filter {
+                    it.courseName.contains(query, ignoreCase = true) ||
+                            it.courseCode.contains(query, ignoreCase = true) ||
+                            it.instructorName.contains(query, ignoreCase = true)
+                }
+                courseAdapter.setData(filteredCourses)
+            }
+        }
+    }
+
+    private fun showUpdateInstructorDialog(course: Courses) {
+        val dialogBinding = DialogCourseUpdateBinding.inflate(layoutInflater)
+        val dialog = Dialog(this)
+        dialog.setContentView(dialogBinding.root)
+
+        dialogBinding.instName.setText(course.instructorName)
+
+        dialogBinding.tvcourseName.text = course.courseName
+
+        dialogBinding.save.setOnClickListener {
+            val newInstructorName = dialogBinding.instName.text.toString()
+
+            if (newInstructorName.isEmpty()) {
+                Toast.makeText(this, "Instructor name cannot be empty!", Toast.LENGTH_SHORT).show()
+            } else {
+                val updatedCourse = Courses(
+                    courseCode = course.courseCode,
+                    courseName = course.courseName,
+                    instructorName = newInstructorName
+                )
+
+                courseViewModel.updateCourse(updatedCourse) { updatedRecords ->
+                    if (updatedRecords > 0) {
+                        Toast.makeText(this, "Instructor updated successfully!", Toast.LENGTH_SHORT).show()
+                        dialog.dismiss()
+                    } else {
+                        Toast.makeText(this, "Failed to update instructor!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+        dialogBinding.close.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+
+
+    fun prepareData() {
+        val initialCourses = listOf(
+            Courses("CTIS-487", "Mobile Application Development", "Leyla Sezer"),
+            Courses("CTIS-359", "Software Engineering Principles", "Cüneyt Sevgi"),
+            Courses("MATH-220", "Linear Algebra", "Ahmet Muhtar Güloğlu"),
+            Courses("COMD-358", "Professional Communication", "Deniz Erbil"),
+            Courses("CTIS-365", "Applied Data Analysis", "Seyid Amjad")
+        )
+        courseViewModel.addCourses(initialCourses)
     }
 
 }
