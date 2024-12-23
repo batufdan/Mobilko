@@ -15,24 +15,24 @@
         android:layout_marginBottom="28dp"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/addStuBtn"
+        app:layout_constraintBottom_toTopOf="@+id/addCourseBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/addStuBtn"
+        android:id="@+id/addCourseBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="41dp"
         android:layout_marginBottom="1dp"
         android:text="Add Student"
-        app:layout_constraintBottom_toTopOf="@+id/stuList"
+        app:layout_constraintBottom_toTopOf="@+id/courseList"
         app:layout_constraintEnd_toEndOf="@+id/search"
         app:layout_constraintTop_toBottomOf="@+id/search" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/stuList"
+        android:id="@+id/courseList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="1dp"
@@ -41,5 +41,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addStuBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/addCourseBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

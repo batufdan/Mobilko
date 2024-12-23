@@ -5,31 +5,41 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AdminCourseActivity">
+    tools:context=".AdminStuActivity">
 
     <EditText
-        android:id="@+id/searchEdit"
+        android:id="@+id/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="28dp"
         android:ems="10"
         android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/addCourseBtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/add"
+        android:id="@+id/addCourseBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="133dp" />
+        android:layout_marginEnd="41dp"
+        android:layout_marginBottom="1dp"
+        android:text="Add Course"
+        app:layout_constraintBottom_toTopOf="@+id/courseList"
+        app:layout_constraintEnd_toEndOf="@+id/search"
+        app:layout_constraintTop_toBottomOf="@+id/search" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courseList"
-        android:layout_width="409dp"
-        android:layout_height="548dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="182dp" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCourseBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>
