@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.zeynepturk.project_487.model.Student
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface StudentDAO {
@@ -20,11 +21,14 @@ interface StudentDAO {
     @Delete
     fun deleteStudent(student: Student): Int
 
-    @Query("SELECT * FROM Student ORDER BY id ASC")
+    @Query("SELECT * FROM student ORDER BY id ASC")
     fun getAllStudents(): LiveData<List<Student>>
 
-    @Query("SELECT * FROM Student WHERE id =:id")
+    @Query("SELECT * FROM student WHERE id =:id")
     fun getStudentById(id: Int): Student
+
+    @Query("SELECT * FROM student WHERE name LIKE :searchKey")
+    fun getCustomersBySearchKey(searchKey: String): Flow<List<Student>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllStudent(students: ArrayList<Student>) {
