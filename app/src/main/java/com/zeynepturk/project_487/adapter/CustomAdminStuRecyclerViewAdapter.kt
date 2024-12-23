@@ -15,6 +15,11 @@ class CustomAdminStuRecyclerViewAdapter(
     private val context: Context,
     private val onItemDelete: (Student) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    interface OnItemClickListener {
+        fun onItemClick(position: Int)
+    }
+
     private var recyclerViewItem = emptyList<Student>()
     fun setData(items: MutableList<Student>) {
         recyclerViewItem = items
@@ -71,7 +76,6 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuMail2: TextView = itemView.findViewById(R.id.mailTxt2)
         val stuCgpa2: TextView = itemView.findViewById(R.id.cgpaTxt2)
         val layout2: LinearLayout = itemView.findViewById(R.id.stuSuccessLayout)
-
     }
     inner class UnsuccessViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val stuId: TextView = itemView.findViewById(R.id.idTxt)
@@ -80,5 +84,6 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuCgpa: TextView = itemView.findViewById(R.id.cgpaTxt)
         val layout: LinearLayout = itemView.findViewById(R.id.stuUnsuccessLayout)
     }
+
 
 }
