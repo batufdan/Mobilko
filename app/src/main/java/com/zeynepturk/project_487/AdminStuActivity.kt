@@ -3,6 +3,7 @@ package com.zeynepturk.project_487
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,6 +20,7 @@ class AdminStuActivity : AppCompatActivity() {
     lateinit var bindingAdminStu: ActivityAdminStuBinding
     lateinit var searchList : Flow<List<Student>>
     lateinit var adapter: CustomAdminStuRecyclerViewAdapter
+    lateinit var students : ArrayList<Student>
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
         Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")
             .allowMainThreadQueries()
@@ -32,9 +34,18 @@ class AdminStuActivity : AppCompatActivity() {
         bindingAdminStu = ActivityAdminStuBinding.inflate(layoutInflater)
         setContentView(bindingAdminStu.root)
 
-        adapter = CustomAdminStuRecyclerViewAdapter(this)
-        bindingAdminStu.stuList.setLayoutManager(LinearLayoutManager(this))
-        bindingAdminStu.stuList.adapter = adapter
+        val b = intent.extras
+        if(b == null){
+            Log.d("STUDENTS", "Null")
+        }else{
+            val adminId = b.getInt("adminId")
+            students = b.getParcelableArrayList("studentList")!!
+            adapter = CustomAdminStuRecyclerViewAdapter(this)
+            adapter.setData(students)
+            bindingAdminStu.stuList.setLayoutManager(LinearLayoutManager(this))
+            bindingAdminStu.stuList.adapter = adapter
+        }
+
         bindingAdminStu.search.addTextChangedListener(object : TextWatcher{
                 override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 }

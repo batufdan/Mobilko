@@ -12,7 +12,7 @@ import org.w3c.dom.Text
 
 class CustomAdminStuRecyclerViewAdapter(
     private val context: Context,
-    private val onItemDelete: (Student) -> Unit
+    //private val onItemDelete: (Student) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var recyclerViewItem = emptyList<Student>()
 
@@ -33,11 +33,29 @@ class CustomAdminStuRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return recyclerViewItem.size
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        val currentItem = recyclerViewItem[position]
+        return currentItem.calculateType()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val currentItem = recyclerViewItem[position]
+        if(getItemViewType(position) == Student.TYPE_SUCCESSFUL) {
+            val itemHolder = holder as SuccessViewHolder
+            itemHolder.stuId2.text = currentItem.id.toString()
+            itemHolder.stuName2.text = currentItem.name
+            itemHolder.stuMail2.text = currentItem.mail
+            itemHolder.stuCgpa2.text = currentItem.cgpa.toString()
+        } else {
+            val itemHolder = holder as UnsuccessViewHolder
+            itemHolder.stuId.text = currentItem.id.toString()
+            itemHolder.stuName.text = currentItem.name
+            itemHolder.stuMail.text = currentItem.mail
+            itemHolder.stuCgpa.text = currentItem.cgpa.toString()
+        }
     }
 
     inner class SuccessViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

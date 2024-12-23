@@ -2,6 +2,7 @@ package com.zeynepturk.project_487
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -52,8 +53,13 @@ class HomePageActivity : AppCompatActivity() {
 
             if (foundAdmin != null) {
                 showToast("Welcome, ${foundAdmin.name}!")
+
+                val b = Bundle().apply {
+                    putParcelableArrayList("studentList", students)
+                    putInt("adminId", it.id)
+                }
                 val intent = Intent(this, AdminMainActivity::class.java).apply {
-                    putExtra("ADMIN_ID", enteredId)
+                    putExtras(b)
                 }
                 startActivity(intent)
                 finish()
@@ -92,7 +98,8 @@ class HomePageActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
     fun prepareData() {
-
+        admins = ArrayList<Admin>()
+        students = ArrayList<Student>()
         val request = studentService.getStudents()
         request.enqueue(object : Callback<ArrayList<Student>> {
             override fun onFailure(call: Call<ArrayList<Student>>, t: Throwable) {
