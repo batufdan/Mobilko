@@ -1,1 +1,27 @@
 hello notlarımızı buraya yazcaz ok
+
+ADMIN
+Admin Main Sayfası
+- Welcome to Mobilkooo
+- Student & Course Button
+
+Admin - Student Page
+- Search -> Student name'e göre ara
+- Add student button -> Dialog açılacak
+    - Student ekle
+- Student List -> Stu img eklenecek
+    - Kaydırınca sil
+    - Tıkla Dialog açılacak
+        - Öğrencinin aldığı dersler spinnerda gösterilcek
+        - Attandace ve grade eklenecek
+
+Admin - Courses Page
+- Search -> Course name'e göre ara
+- Add course button -> Dialog açılacak
+    - Course ekle
+- Course List
+    - Kaydırınca sil
+    - Tıkla Dialog açılacak
+        - Instructor değiştirilecek
+
+
