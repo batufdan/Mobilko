@@ -23,10 +23,10 @@ class HomePageActivity : AppCompatActivity() {
     )
 
     private val students = arrayListOf(
-        Student(1, "duruko", "Duru Kırcı", "kirciduru@gmail.com"),
-        Student(2, "zeyno", "Zeynep Türk", "zeynepturk74@gmail.com"),
-        Student(3, "1111", "Batuhan Fidan", "batuhanfidan59@gmail.com"),
-        Student(4, "sueda", "Sueda Akça","akcasueda@gmail.com")
+        Student(1, "duruko", "Duru Kırcı", "kirciduru@gmail.com", 4.00),
+        Student(2, "zeyno", "Zeynep Türk", "zeynepturk74@gmail.com", 3.98),
+        Student(3, "1111", "Batuhan Fidan", "batuhanfidan59@gmail.com", 1.80),
+        Student(4, "sueda", "Sueda Akça","akcasueda@gmail.com", 3.96)
     )
 
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
