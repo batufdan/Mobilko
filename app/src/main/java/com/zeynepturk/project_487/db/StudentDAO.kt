@@ -22,13 +22,13 @@ interface StudentDAO {
     fun deleteStudent(student: Student): Int
 
     @Query("SELECT * FROM student ORDER BY id ASC")
-    fun getAllStudents(): LiveData<List<Student>>
+    fun getAllStudents(): LiveData<MutableList<Student>>
 
     @Query("SELECT * FROM student WHERE id =:id")
     fun getStudentById(id: Int): Student
 
     @Query("SELECT * FROM student WHERE name LIKE :searchKey")
-    fun getStudentsBySearchKey(searchKey: String): Flow<List<Student>>
+    fun getStudentsBySearchKey(searchKey: String): MutableList<Student>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllStudent(students: ArrayList<Student>) {

@@ -10,6 +10,7 @@ import androidx.room.Room
 import com.zeynepturk.project_487.databinding.ActivityHomePageBinding
 import com.zeynepturk.project_487.db.MobilkoRoomDatabase
 import com.zeynepturk.project_487.model.Admin
+import com.zeynepturk.project_487.model.CoursesTaken
 import com.zeynepturk.project_487.model.Student
 import com.zeynepturk.project_487.retrofit.StudentService
 import com.zeynepturk.project_487.util.ApiClient
@@ -22,6 +23,7 @@ class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
     lateinit var students: ArrayList<Student>
     lateinit var admins:  ArrayList<Admin>
+    lateinit var coursesTakenList: ArrayList<CoursesTaken>
     lateinit var studentService: StudentService
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
         Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")
@@ -35,9 +37,11 @@ class HomePageActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         studentService = ApiClient.getClient()
             .create(StudentService::class.java)
 
+        students = ArrayList<Student>()
         getData()
 
         binding.adminBtn.setOnClickListener {
@@ -53,14 +57,8 @@ class HomePageActivity : AppCompatActivity() {
 
             if (foundAdmin != null) {
                 showToast("Welcome, ${foundAdmin.name}!")
-
-                val b = Bundle().apply {
-                    putParcelableArrayList("studentList", students)
-                    putInt("adminId", it.id)
-                }
-                val intent = Intent(this, AdminMainActivity::class.java).apply {
-                    putExtras(b)
-                }
+                val intent = Intent(this, AdminMainActivity::class.java)
+                intent.putExtra("adminId", it.id)
                 startActivity(intent)
                 finish()
             } else {
@@ -97,18 +95,23 @@ class HomePageActivity : AppCompatActivity() {
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
+
     fun prepareData() {
         admins = ArrayList<Admin>()
-        students = ArrayList<Student>()
+        coursesTakenList = ArrayList<CoursesTaken>()
         val request = studentService.getStudents()
-        request.enqueue(object : Callback<ArrayList<Student>> {
-            override fun onFailure(call: Call<ArrayList<Student>>, t: Throwable) {
-                Toast.makeText(applicationContext, t.message.toString(), Toast.LENGTH_LONG).show()
+        request.enqueue(object : Callback<List<Student>> {
+            override fun onFailure(call: Call<List<Student>>, t: Throwable) {
+                Log.d("FAIL JSON", t.message.toString())
             }
-            override fun onResponse(call: Call<ArrayList<Student>>, response: Response<ArrayList<Student>>) {
+            override fun onResponse(call: Call<List<Student>>, response: Response<List<Student>>) {
                 if (response.isSuccessful) {
+                    Log.d("RESPONSE SUCCESSFUL", response.body().toString())
                     students = (response.body() as ArrayList<Student>?)!!
+                    Log.d("RESPONSE SUCCESSFUL", students.toString())
                 }
+                Log.d("RESPONSE BLA BLA", "ne yaptığını bilmiyoz")
+                mobilkoDB.studentDao().insertAllStudent(students)
             }
         })
 
@@ -119,12 +122,26 @@ class HomePageActivity : AppCompatActivity() {
             Admin(3, "1111", "Batuhan Fidan"),
             Admin(4, "sueda55", "Sueda Akça")
         )
+
+
+        Collections.addAll(
+            coursesTakenList,
+            CoursesTaken("CTIS-487", 1, 80, 100),
+            CoursesTaken("CTIS-365", 1, 50, 70),
+            CoursesTaken("CTIS-359", 1, 90, 30),
+            CoursesTaken("CTIS-487", 2, 40, 75),
+            CoursesTaken("CTIS-365", 2, 10, 56),
+            CoursesTaken("COMD-358", 3, 100, 68),
+            CoursesTaken("HIST-200", 3, 80, 100),
+            CoursesTaken("CTIS-487", 4, 100, 70),
+            CoursesTaken("CTIS-359", 4, 90, 80)
+        )
     }
 
 
     private fun getData(){
         prepareData()
-        mobilkoDB.studentDao().insertAllStudent(students)
         mobilkoDB.adminDao().insertAllAdmin(admins)
+        mobilkoDB.coursesTakenDao().insertAllTakens(coursesTakenList)
     }
 }

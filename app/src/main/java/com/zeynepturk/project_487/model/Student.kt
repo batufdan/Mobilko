@@ -5,37 +5,21 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.google.gson.annotations.SerializedName
 
-@SuppressLint("ParcelCreator")
+
 @Entity(tableName = "student")
-
 class Student(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
-    var pass: String,
-    var name: String,
-    var mail: String,
-    var cgpa: Double
-) : Parcelable {
-    companion object CREATOR : Parcelable.Creator<Student> {
-        override fun createFromParcel(parcel: Parcel): Student {
-            return Student(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Student?> {
-            return arrayOfNulls(size)
-        }
+    @PrimaryKey(autoGenerate = false) // True yapınca patladı?
+    @SerializedName("id") var id: Int = 0,
+    @SerializedName("pass") var pass: String,
+    @SerializedName("name") var name: String,
+    @SerializedName("mail") var mail: String,
+    @SerializedName("cgpa") var cgpa: Double
+){
+    companion object {
         const val TYPE_SUCCESSFUL = 100
         const val TYPE_UNSUCCESSFUL = 200
-    }
-
-    constructor(parcel: Parcel) : this(
-        parcel.readInt(),
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.readDouble()
-    ) {
     }
 
     fun calculateType():Int {
@@ -44,18 +28,7 @@ class Student(
         else
             TYPE_UNSUCCESSFUL
     }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(id)
-        parcel.writeString(pass)
-        parcel.writeString(name)
-        parcel.writeString(mail)
-        parcel.writeDouble(cgpa)
+    override fun toString(): String {
+        return "Student(id=$id, name=$name, pass=$pass, mail=$mail, cgpa=$cgpa)"
     }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-
 }

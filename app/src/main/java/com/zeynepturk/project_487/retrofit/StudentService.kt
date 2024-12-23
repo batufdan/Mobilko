@@ -6,6 +6,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface StudentService {
-    @GET("posts")
-    fun getStudents(): Call<ArrayList<Student>>
+    @GET("https://jsonkeeper.com/b/JC0I/")
+    fun getStudents(): Call<List<Student>>
 }

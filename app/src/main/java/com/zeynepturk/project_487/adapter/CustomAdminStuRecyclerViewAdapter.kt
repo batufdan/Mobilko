@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.zeynepturk.project_487.R
@@ -12,13 +13,19 @@ import org.w3c.dom.Text
 
 class CustomAdminStuRecyclerViewAdapter(
     private val context: Context,
-    //private val onItemDelete: (Student) -> Unit
+    private val onItemDelete: (Student) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var recyclerViewItem = emptyList<Student>()
-
-    fun setData(items: List<Student>) {
+    fun setData(items: MutableList<Student>) {
         recyclerViewItem = items
         notifyDataSetChanged()
+    }
+
+    fun removeItem(position: Int) {
+        val item = recyclerViewItem[position]
+        onItemDelete(item)
+        recyclerViewItem = recyclerViewItem.toMutableList().apply { removeAt(position) }
+        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -63,6 +70,7 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuName2: TextView = itemView.findViewById(R.id.nameTxt2)
         val stuMail2: TextView = itemView.findViewById(R.id.mailTxt2)
         val stuCgpa2: TextView = itemView.findViewById(R.id.cgpaTxt2)
+        val layout2: LinearLayout = itemView.findViewById(R.id.stuSuccessLayout)
 
     }
     inner class UnsuccessViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -70,5 +78,7 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuName: TextView = itemView.findViewById(R.id.nameTxt)
         val stuMail: TextView = itemView.findViewById(R.id.mailTxt)
         val stuCgpa: TextView = itemView.findViewById(R.id.cgpaTxt)
+        val layout: LinearLayout = itemView.findViewById(R.id.stuUnsuccessLayout)
     }
+
 }

@@ -28,16 +28,16 @@ interface CoursesTakenDAO {
     This awareness ensures LiveData only updates app component observers that are in an active lifecycle state
     */
 
-    @Query("SELECT * FROM CoursesTaken ORDER BY coursesCode ASC")
-    fun getAllTakens(): LiveData<List<CoursesTaken>>
+    @Query("SELECT * FROM CoursesTaken WHERE stuID = :id ORDER BY coursesCode ASC")
+    fun getAllTakenById(id: Int): LiveData<List<CoursesTaken>>
     // LiveData means aware of the modification
 
     @Query("SELECT * FROM CoursesTaken WHERE coursesCode =:id")
     fun getTakenById(id: Int): CoursesTaken
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllTakens(customers: ArrayList<CoursesTaken>) {
-        customers.forEach {
+    fun insertAllTakens(coursesTaken: ArrayList<CoursesTaken>) {
+        coursesTaken.forEach {
             insertTaken(it)
         }
     }

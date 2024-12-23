@@ -10,7 +10,7 @@ import com.zeynepturk.project_487.model.CoursesTaken
 import com.zeynepturk.project_487.model.Instructor
 import com.zeynepturk.project_487.model.Student
 
-@Database(entities = [Student::class, Admin::class, Instructor::class, Courses::class, CoursesTaken::class], version = 2)
+@Database(entities = [Student::class, Admin::class, Instructor::class, Courses::class, CoursesTaken::class], version = 3)
 abstract class MobilkoRoomDatabase : RoomDatabase() {
     abstract fun studentDao(): StudentDAO
     abstract fun adminDao(): AdminDAO
