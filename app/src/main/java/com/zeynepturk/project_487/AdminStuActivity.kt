@@ -1,21 +1,32 @@
 package com.zeynepturk.project_487
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextWatcher
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.room.Room
 import com.zeynepturk.project_487.databinding.ActivityAdminStuBinding
+import com.zeynepturk.project_487.db.MobilkoRoomDatabase
+import com.zeynepturk.project_487.model.Student
+import kotlinx.coroutines.flow.Flow
 
 class AdminStuActivity : AppCompatActivity() {
     lateinit var bindingAdminStu: ActivityAdminStuBinding
-    private val stuDB:
+    lateinit var searchList : Flow<List<Student>>
+    private val stuDB: MobilkoRoomDatabase by lazy {
+        Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")
+            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
+            .build()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         bindingAdminStu = ActivityAdminStuBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_admin_stu)
+        setContentView(bindingAdminStu.root)
 
 
         bindingAdminStu.search.addTextChangedListener(object : TextWatcher{
@@ -23,16 +34,16 @@ class AdminStuActivity : AppCompatActivity() {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    performSearch(s.toString())
+                    searchStu(s.toString())
                 }
 
                 override fun afterTextChanged(s: Editable?) {
-                    // Harf yazıldıktan sonra yapılacak işlemler
+                    searchStu(s.toString())
                 }
         })
     }
 
     private fun searchStu(s : String){
-
+        searchList = stuDB.studentDao().getStudentsBySearchKey(s)
     }
 }

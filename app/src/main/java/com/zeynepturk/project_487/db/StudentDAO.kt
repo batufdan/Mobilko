@@ -28,7 +28,7 @@ interface StudentDAO {
     fun getStudentById(id: Int): Student
 
     @Query("SELECT * FROM student WHERE name LIKE :searchKey")
-    fun getCustomersBySearchKey(searchKey: String): Flow<List<Student>>
+    fun getStudentsBySearchKey(searchKey: String): Flow<List<Student>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllStudent(students: ArrayList<Student>) {
