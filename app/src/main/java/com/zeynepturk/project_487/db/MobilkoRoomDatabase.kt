@@ -1,6 +1,8 @@
 package com.zeynepturk.project_487.db
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.zeynepturk.project_487.model.Admin
 import com.zeynepturk.project_487.model.Courses

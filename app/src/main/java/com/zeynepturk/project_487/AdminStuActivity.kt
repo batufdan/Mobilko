@@ -16,12 +16,13 @@ import kotlinx.coroutines.flow.Flow
 class AdminStuActivity : AppCompatActivity() {
     lateinit var bindingAdminStu: ActivityAdminStuBinding
     lateinit var searchList : Flow<List<Student>>
-    private val stuDB: MobilkoRoomDatabase by lazy {
+    private val mobilkoDB: MobilkoRoomDatabase by lazy {
         Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")
             .allowMainThreadQueries()
             .fallbackToDestructiveMigration()
             .build()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -44,6 +45,6 @@ class AdminStuActivity : AppCompatActivity() {
     }
 
     private fun searchStu(s : String){
-        searchList = stuDB.studentDao().getStudentsBySearchKey(s)
+        searchList = mobilkoDB.studentDao().getStudentsBySearchKey(s)
     }
 }

@@ -1,6 +1,7 @@
 package com.zeynepturk.project_487.db
 
 import androidx.lifecycle.LiveData
+import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -8,7 +9,7 @@ import androidx.room.Query
 import androidx.room.Update
 import com.zeynepturk.project_487.model.Courses
 import kotlinx.coroutines.flow.Flow
-
+@Dao
 interface CoursesDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertCourse(courses: Courses): Long // suspend is written because it will be used with coroutine

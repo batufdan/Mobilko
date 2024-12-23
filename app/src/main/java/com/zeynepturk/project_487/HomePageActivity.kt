@@ -24,7 +24,7 @@ class HomePageActivity : AppCompatActivity() {
         Student(1, "duruko", "Duru Kırcı", "kirciduru@gmail.com"),
         Student(2, "zeyno", "Zeynep Türk", "zeynepturk74@gmail.com"),
         Student(3, "1111", "Batuhan Fidan", "batuhanfidan59@gmail.com"),
-        Student(4, "sueda", "Sueda Akça", "akcasueda@gmail.com")
+        Student(4, "sueda", "Sueda Akça","akcasueda@gmail.com")
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
