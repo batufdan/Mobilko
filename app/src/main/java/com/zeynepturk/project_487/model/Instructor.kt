@@ -1,4 +1,4 @@
-package com.zeynepturk.project_487.db
+package com.zeynepturk.project_487.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "instructor")
 class Instructor(
     @PrimaryKey(autoGenerate = true)
-    var instructorID: Int,
+    var instructorID: Int = 0,
     var instructorName: String,
     var instructorOfficeHour: String,
     var isTaken: String,

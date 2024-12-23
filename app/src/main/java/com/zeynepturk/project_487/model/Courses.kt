@@ -1,6 +1,5 @@
-package com.zeynepturk.project_487.db
+package com.zeynepturk.project_487.model
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -9,7 +8,6 @@ class Courses(
     @PrimaryKey(autoGenerate = true)
     var courseCode: String,
     var courseName: String,
-    var instructorId: Int,
-    var crsExamDate: String
+    var instructorName: String
 ) {
 }

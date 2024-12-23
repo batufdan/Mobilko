@@ -1,7 +1,5 @@
-package com.zeynepturk.project_487.db
+package com.zeynepturk.project_487.model
 
-import android.os.Parcelable
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

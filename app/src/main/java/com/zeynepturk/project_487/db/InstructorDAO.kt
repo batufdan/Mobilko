@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import kotlinx.coroutines.flow.Flow
+import com.zeynepturk.project_487.model.Instructor
 
 interface InstructorDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

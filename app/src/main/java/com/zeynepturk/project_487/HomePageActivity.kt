@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.zeynepturk.project_487.databinding.ActivityHomePageBinding
-import com.zeynepturk.project_487.db.Student
+import com.zeynepturk.project_487.model.Student
 
 class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
