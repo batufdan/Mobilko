@@ -8,67 +8,81 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.zeynepturk.project_487.databinding.ActivityHomePageBinding
+import com.zeynepturk.project_487.model.Admin
 import com.zeynepturk.project_487.model.Student
 
 class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
+    private val admins = listOf(
+        Admin(1, "duruko16", "Duru Kırcı"),
+        Admin(2, "zeyno1", "Zeynep Türk"),
+        Admin(3, "1111", "Batuhan Fidan"),
+        Admin(4, "sueda55", "Sueda Akça")
+    )
+
     private val students = listOf(
-        Student(1, "duruko16", "Duru Kırcı", "kirciduru@gmail.com"),
-        Student(2, "zeyno1", "Zeynep Türk", "zeynepturk74@gmail.com"),
-        Student(3, "1111", "Batuhan Fidan", "batuhanfidan59@hotmail.com"),
-        Student(4, "sueda55", "Sueda Akça", "akcasueda@gmail.com")
+        Student(1, "duruko", "Duru Kırcı", "kirciduru@gmail.com"),
+        Student(2, "zeyno", "Zeynep Türk", "zeynepturk74@gmail.com"),
+        Student(3, "1111", "Batuhan Fidan", "batuhanfidan59@gmail.com"),
+        Student(4, "sueda", "Sueda Akça", "akcasueda@gmail.com")
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityHomePageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+
+        binding.adminBtn.setOnClickListener {
+            val enteredId = binding.studentIdInput.text.toString().trim()
+            val enteredPass = binding.passwordInput.text.toString().trim()
+
+            if (enteredId.isEmpty() || enteredPass.isEmpty()) {
+                showToast("Please fill in both fields!")
+            }
+            val foundAdmin = admins.find {
+                it.id == enteredId.toInt() && it.pass == enteredPass
+            }
+
+            if (foundAdmin != null) {
+                showToast("Welcome, ${foundAdmin.name}!")
+                val intent = Intent(this, AdminMainActivity::class.java).apply {
+                    putExtra("ADMIN_ID", enteredId)
+                }
+                startActivity(intent)
+                finish()
+            } else {
+                showToast("Invalid ID or Password!")
+            }
         }
 
-        binding.loginButton.setOnClickListener {
-            handleLogin()
+        binding.studentBtn.setOnClickListener {
+            val enteredId = binding.studentIdInput.text.toString().trim()
+            val enteredPass = binding.passwordInput.text.toString().trim()
+
+            if (enteredId.isEmpty() || enteredPass.isEmpty()) {
+                showToast("Please fill in both fields!")
+            }
+
+            val foundStudent = students.find {
+                it.id == enteredId.toInt() && it.pass == enteredPass
+            }
+
+            if (foundStudent != null) {
+                showToast("Welcome, ${foundStudent.name}!")
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra("STUDENT_ID", enteredId)
+                }
+                startActivity(intent)
+                finish()
+            } else {
+                showToast("Invalid ID or Password!")
+            }
         }
 
-    }
-
-    private fun handleLogin(){
-        val enteredId = binding.studentIdInput.text.toString().trim()
-        val enteredPass = binding.passwordInput.text.toString().trim()
-
-        if (enteredId.isEmpty() || enteredPass.isEmpty()) {
-            showToast("Please fill in both fields!")
-            return
-        }
-
-        val foundStudent = students.find {
-            it.id == enteredId.toInt() && it.pass == enteredPass
-        }
-
-        if (foundStudent != null) {
-            showToast("Welcome, ${foundStudent.name}!")
-            navigateToMain(foundStudent.id)
-        } else {
-            showToast("Invalid Student ID or Password!")
-        }
-
-    }
-
-    private fun navigateToMain(studentId: Int) {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            putExtra("STUDENT_ID", studentId)
-        }
-        startActivity(intent)
-        finish()
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-
-
-
 }

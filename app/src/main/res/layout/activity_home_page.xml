@@ -28,7 +28,7 @@
         android:layout_marginBottom="177dp"
         android:hint="@string/enter_student_id"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintBottom_toTopOf="@+id/studentBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -46,15 +46,25 @@
         app:layout_constraintTop_toBottomOf="@+id/studentIdInput" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/studentBtn"
         android:layout_width="173dp"
         android:layout_height="58dp"
         android:layout_marginBottom="283dp"
         android:backgroundTint="#057268"
-        android:text="@string/login"
+        android:text="Student"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/adminBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="38dp"
+        android:text="Admin"
+        app:layout_constraintEnd_toEndOf="@+id/studentBtn"
+        app:layout_constraintTop_toBottomOf="@+id/studentBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
