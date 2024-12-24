@@ -23,19 +23,59 @@
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
+                <!-- Course Table Section -->
                 <TextView
-                    android:id="@+id/studentInfo"
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView5"
+                    android:layout_width="123dp"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white"
-                    android:elevation="4dp"
-                    android:layout_marginBottom="16dp"
-                    android:padding="12dp"
-                    android:text="@string/student_info_text"
-                    android:textSize="16sp"
+                    android:text="ID"
                     android:textStyle="bold" />
 
-                <!-- Course Table Section -->
+                <TextView
+                    android:id="@+id/stuID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="123dp"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/stuName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="123dp"
+                    android:layout_height="wrap_content"
+                    android:text="Mail"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/stuMail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="123dp"
+                    android:layout_height="wrap_content"
+                    android:text="CGPA"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/stuCGPA"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
                 <TextView
                     android:id="@+id/courseTableTitle"
                     android:layout_width="wrap_content"
@@ -62,24 +102,6 @@
                     android:layout_marginBottom="8dp"
                     android:backgroundTint="#1FBFD4"
                     android:text="@string/office_hour"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/mealButton"
-                    android:layout_width="190dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:backgroundTint="#A61CBE"
-                    android:text="@string/meal"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/examScheduleButton"
-                    android:layout_width="191dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:backgroundTint="#E7D425"
-                    android:text="@string/exam_schedule"
                     android:textStyle="bold" />
 
         </LinearLayout>
