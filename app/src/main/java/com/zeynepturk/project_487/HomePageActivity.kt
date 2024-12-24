@@ -11,6 +11,7 @@ import com.zeynepturk.project_487.databinding.ActivityHomePageBinding
 import com.zeynepturk.project_487.db.MobilkoRoomDatabase
 import com.zeynepturk.project_487.model.Admin
 import com.zeynepturk.project_487.model.CoursesTaken
+import com.zeynepturk.project_487.model.Instructor
 import com.zeynepturk.project_487.model.Student
 import com.zeynepturk.project_487.retrofit.StudentService
 import com.zeynepturk.project_487.util.ApiClient
@@ -23,6 +24,7 @@ class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
     lateinit var students: ArrayList<Student>
     lateinit var admins:  ArrayList<Admin>
+    lateinit var instructors: List<Instructor>
     lateinit var coursesTakenList: ArrayList<CoursesTaken>
     lateinit var studentService: StudentService
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
@@ -90,7 +92,6 @@ class HomePageActivity : AppCompatActivity() {
                 showToast("Invalid ID or Password!")
             }
         }
-
     }
 
     private fun showToast(message: String) {
@@ -124,7 +125,6 @@ class HomePageActivity : AppCompatActivity() {
             Admin(4, "sueda55", "Sueda Akça")
         )
 
-
         Collections.addAll(
             coursesTakenList,
             CoursesTaken("CTIS-487", 0, 80, 100),
@@ -137,6 +137,16 @@ class HomePageActivity : AppCompatActivity() {
             CoursesTaken("CTIS-487", 3, 100, 70),
             CoursesTaken("CTIS-359", 3, 90, 80)
         )
+
+        instructors = listOf(
+            Instructor(1, "Neşe Özçelik", "Monday 14:30-15:20", "Not Taken", "nozcelik@bilkent.edu.tr"),
+            Instructor(2, "Cüneyt Sevgi", "Monday 13:30-14:20", "Not Taken", "csevgi@bilkent.edu.tr"),
+            Instructor(3, "Ahmet Muhtar Güloğlu", "Tuesday 11:30-12:20", "Not Taken", "guloglua@fen.bilkent.edu.tr"),
+            Instructor(4, "Seyid Amjad", "Thursday 11:30-12:20", "Not Taken", "amjadali@bilkent.edu.tr"),
+            Instructor(5, "Leyla Sezer", "Friday 11:30-12:20", "Taken", "sezerleyla@bilkent.edu.tr"),
+            Instructor(6, "Özen Baş", "Friday 10:30-11:20", "Taken", "ozenbas@bilkent.edu.tr"),
+            Instructor(7, "Kudret Emiroğlu", "Wednesday 11:30-12:20", "Not Taken", "kudretemiroglu@bilkent.edu.tr")
+        )
     }
 
 
@@ -144,5 +154,6 @@ class HomePageActivity : AppCompatActivity() {
         prepareData()
         mobilkoDB.adminDao().insertAllAdmin(admins)
         mobilkoDB.coursesTakenDao().insertAllTakens(coursesTakenList)
+        mobilkoDB.instructorDao().insertAllInstructors(instructors)
     }
 }

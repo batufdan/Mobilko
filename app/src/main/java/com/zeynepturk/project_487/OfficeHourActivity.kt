@@ -74,24 +74,7 @@ class OfficeHourActivity : AppCompatActivity() {
                 binding.instructorRecycler.adapter = adapter
                 }
         })
-
-        initializeDatabase()
-
     }
-    private fun initializeDatabase() {
-        val instructors = listOf(
-            Instructor(1, "Neşe Özçelik", "Monday 14:30-15:20", "Not Taken", "nozcelik@bilkent.edu.tr"),
-            Instructor(2, "Cüneyt Sevgi", "Monday 13:30-14:20", "Not Taken", "csevgi@bilkent.edu.tr"),
-            Instructor(3, "Ahmet Muhtar Güloğlu", "Tuesday 11:30-12:20", "Not Taken", "guloglua@fen.bilkent.edu.tr"),
-            Instructor(4, "Seyid Amjad", "Thursday 11:30-12:20", "Not Taken", "amjadali@bilkent.edu.tr"),
-            Instructor(5, "Leyla Sezer", "Friday 11:30-12:20", "Taken", "sezerleyla@bilkent.edu.tr"),
-            Instructor(6, "Özen Baş", "Friday 10:30-11:20", "Taken", "ozenbas@bilkent.edu.tr"),
-            Instructor(7, "Kudret Emiroğlu", "Wednesday 11:30-12:20", "Not Taken", "kudretemiroglu@bilkent.edu.tr")
-        )
-
-        mobilkoDB.instructorDao().insertAllInstructors(instructors)
-    }
-
 
     private fun handleTakeClick(instructor: Instructor) {
         if (instructor.isTaken == "Not Taken") {
@@ -108,6 +91,5 @@ class OfficeHourActivity : AppCompatActivity() {
             Toast.makeText(this, "This office hour is already taken.", Toast.LENGTH_SHORT).show()
         }
     }
-
 
 }
