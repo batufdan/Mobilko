@@ -10,6 +10,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.daimajia.androidanimations.library.Techniques
+import com.daimajia.androidanimations.library.YoYo
 import com.zeynepturk.project_487.R
 import com.zeynepturk.project_487.db.InstructorDAO
 import com.zeynepturk.project_487.model.Instructor
@@ -56,10 +58,13 @@ class CustomInstructorRecyclerViewAdapter(private val context: Context,
                 btnTake.visibility = View.VISIBLE
                 val mediaPlayer = MediaPlayer.create(context, R.raw.boom_sound_effect)
                 btnTake.setOnClickListener {
-                    btnTake.visibility = View.INVISIBLE
                     mediaPlayer.start()
                     Log.d("CLICKED", ins.isTaken)
                     onTakeClick(instructor)
+                    YoYo.with(Techniques.FadeOut)
+                        .duration(700) // Duration of the animation in milliseconds
+                        .onEnd { btnTake.visibility = View.GONE } // Hide the button after the animation
+                        .playOn(btnTake)
                 }
                 mediaPlayer.setOnCompletionListener {
                     mediaPlayer.release()
