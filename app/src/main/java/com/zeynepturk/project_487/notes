@@ -25,3 +25,21 @@ Admin - Courses Page
         - Instructor değiştirilecek
 
 
+STUDENT
+Student Main Page
+- Student Info
+- Recycler View -> Show Courses Taken (Course Code, Course Name, Attendance, Grade)
+- Office Hour Button
+
+Office Hour Page
+- Inst. Name and Course Code
+- Office hours
+- Button -> if taken = button invisible
+- Button animasyonla kaybolcak (diff library)
+- Button tıklandığında sound
+
+
+EKLENECEKLER
+- Worker
+- App icon
+- Professional looking
