@@ -15,10 +15,11 @@ import com.zeynepturk.project_487.model.Student
 class CustomStudentRVAdapter(private val context: Context, private val onItemClicked: (Courses) -> Unit) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var recyclerViewItem = emptyList<Courses>()
 
-    fun setData(items: MutableList<Courses>) {
+    fun setData(items: List<Courses>) {
         recyclerViewItem = items
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflator = LayoutInflater.from(parent.context)
@@ -35,6 +36,9 @@ class CustomStudentRVAdapter(private val context: Context, private val onItemCli
         val itemHolder = holder as CourseViewHolder
         itemHolder.courseCode.text = currentItem.courseCode
         itemHolder.courseName.text = currentItem.courseName
+        itemHolder.layout.setOnClickListener {
+            onItemClicked(currentItem)
+        }
     }
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

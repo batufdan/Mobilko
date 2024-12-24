@@ -33,6 +33,9 @@ interface CoursesDAO {
     @Query("SELECT * FROM Courses WHERE courseName LIKE :searchKey OR courseCode LIKE :searchKey")
     fun getCourseBySearchKey(searchKey: String): Flow<List<Courses>>
 
+    @Query("SELECT instructorName FROM courses WHERE courseCode = :code")
+    fun getInstNameByCode(code: String) : String
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllCourses(customers: ArrayList<Courses>) {
         customers.forEach {

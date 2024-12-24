@@ -12,4 +12,7 @@ class Instructor(
     var isTaken: String,
     var instructorMail: String
 ) {
+    override fun toString(): String {
+        return "Name = $instructorName, officeHour = $instructorOfficeHour"
+    }
 }

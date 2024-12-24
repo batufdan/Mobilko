@@ -80,8 +80,9 @@ class HomePageActivity : AppCompatActivity() {
 
             if (foundStudent != null) {
                 showToast("Welcome, ${foundStudent.name}!")
+                Log.d("ENTERED ID", enteredId)
                 val intent = Intent(this, StudentMainActivity::class.java).apply {
-                    putExtra("STUDENT_ID", enteredId)
+                    putExtra("STUDENT_ID", enteredId.toInt())
                 }
                 startActivity(intent)
                 finish()

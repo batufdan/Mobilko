@@ -8,6 +8,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.zeynepturk.project_487.model.CoursesTaken
+import com.zeynepturk.project_487.model.Instructor
+
 @Dao
 interface CoursesTakenDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -28,12 +30,19 @@ interface CoursesTakenDAO {
     This awareness ensures LiveData only updates app component observers that are in an active lifecycle state
     */
 
+
     @Query("SELECT * FROM CoursesTaken WHERE stuID = :id ORDER BY coursesCode ASC")
     fun getAllTakenById(id: Int): LiveData<List<CoursesTaken>>
     // LiveData means aware of the modification
 
-    @Query("SELECT * FROM CoursesTaken WHERE coursesCode =:id")
+    @Query("SELECT * FROM coursesTaken WHERE coursesCode =:id")
     fun getTakenById(id: Int): CoursesTaken
+
+    @Query("SELECT * FROM coursesTaken WHERE stuID = :studentId")
+    fun getCoursesTakenByStudentId(studentId: Int): List<CoursesTaken>
+
+    @Query("SELECT * from coursesTaken WHERE stuID = :id AND coursesCode = :code")
+    fun getAttGradeByIdAndCode(id: Int, code: String) : CoursesTaken
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllTakens(coursesTaken: ArrayList<CoursesTaken>) {

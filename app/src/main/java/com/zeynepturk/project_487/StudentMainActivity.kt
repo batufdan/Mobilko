@@ -12,11 +12,15 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.map
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.zeynepturk.project_487.adapter.CustomInstructorRecyclerViewAdapter
+import com.zeynepturk.project_487.adapter.CustomStudentRVAdapter
 import com.zeynepturk.project_487.databinding.ActivityStuMainBinding
 import com.zeynepturk.project_487.db.MobilkoRoomDatabase
 import com.zeynepturk.project_487.model.Courses
 import com.zeynepturk.project_487.model.CoursesTaken
+import com.zeynepturk.project_487.model.Instructor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,6 +29,7 @@ import kotlinx.coroutines.withContext
 class StudentMainActivity : AppCompatActivity() {
     lateinit var bindingStu: ActivityStuMainBinding
     lateinit var taken: LiveData<List<CoursesTaken>>
+    lateinit var adapter: CustomStudentRVAdapter
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
         Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")
             .allowMainThreadQueries()
@@ -55,9 +60,23 @@ class StudentMainActivity : AppCompatActivity() {
                 val courseCodes: ArrayList<String> =
                     ArrayList(coursesTakenList.map { it.coursesCode })
 
-                val takenCourses : List<Courses> = courseCodes.map { mobilkoDB.coursesDao().getCoursesById(it) }
-                bindingStu.temp.text = takenCourses.joinToString(","){it.courseName}
+                val takenCourses : List<Courses> = courseCodes.mapNotNull { mobilkoDB.coursesDao().getCoursesById(it) }
 
+                adapter = CustomStudentRVAdapter(this, onItemClicked = { courses ->
+                    val i = Intent(this, CourseDetailActivity::class.java)
+                    val b = Bundle().apply {
+                        putString("CourseName", courses.courseName)
+                        putString("Course Code", courses.courseCode)
+                        putString("Instructor", courses.instructorName)
+                        putInt("stuId", stuID)
+                    }
+                    i.putExtras(b)
+                    startActivity(i)
+                })
+
+                adapter.setData(takenCourses)
+                bindingStu.courseTable.layoutManager = LinearLayoutManager(this)
+                bindingStu.courseTable.adapter = adapter
             }
         })
 

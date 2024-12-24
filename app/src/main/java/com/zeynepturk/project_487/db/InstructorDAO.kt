@@ -19,22 +19,27 @@ interface InstructorDAO {
     @Delete
     fun deleteInstructor(instructor: Instructor): Int
 
-    @Query("DELETE FROM Instructor")
+    @Query("DELETE FROM instructor")
     fun deleteAllInstructor()
 
 
-    @Query("SELECT * FROM Instructor ORDER BY instructorID ASC")
+    @Query("SELECT * FROM instructor ORDER BY instructorID ASC")
     fun getAllInstructors(): LiveData<List<Instructor>>
-    // LiveData means aware of the modification
 
-    @Query("SELECT * FROM Instructor WHERE instructorID =:id")
-    fun getInstructorById(id: Int): Instructor
+    @Query("SELECT * FROM instructor WHERE instructorName = :name")
+    fun getInstructorByName(name: String): Instructor?
+
+    @Query("UPDATE instructor SET isTaken = 'Taken' WHERE instructorName = :name")
+    fun toggleIsTakenByName(name: String): Int
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllInstructors(customers: ArrayList<Instructor>) {
-        customers.forEach {
+    fun insertAllInstructors(instructors: List<Instructor>) {
+        instructors.forEach {
             insertInstructor(it)
         }
     }
+
+
 
 }
