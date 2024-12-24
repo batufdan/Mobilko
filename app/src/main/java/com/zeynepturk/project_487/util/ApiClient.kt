@@ -13,7 +13,7 @@ object ApiClient {
     fun getClient(): Retrofit {
         if (retrofit == null)
             retrofit = Retrofit.Builder()
-                .baseUrl("https://jsonkeeper.com/b/JC0I/")
+                .baseUrl("https://jsonkeeper.com/b/5EXP/")
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create()) //retrofit will understand as a converter GSON converter will be used
                 .build()
