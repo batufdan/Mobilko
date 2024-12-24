@@ -6,7 +6,15 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.room.Room
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
+import com.ctis487.workerjsondatabase.backgroundservice.CustomWorker
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 import com.zeynepturk.project_487.databinding.ActivityHomePageBinding
 import com.zeynepturk.project_487.db.MobilkoRoomDatabase
 import com.zeynepturk.project_487.model.Admin
@@ -45,6 +53,7 @@ class HomePageActivity : AppCompatActivity() {
 
         students = ArrayList<Student>()
         getData()
+
 
         binding.adminBtn.setOnClickListener {
             val enteredId = binding.studentIdInput.text.toString().trim()
@@ -152,7 +161,29 @@ class HomePageActivity : AppCompatActivity() {
 
     private fun getData(){
         prepareData()
-        mobilkoDB.adminDao().insertAllAdmin(admins)
+
+        //Farklılık olsun diye admini seçtim
+        val gson = Gson()
+        val adminsJson = gson.toJson(admins)
+
+        val workRequest = OneTimeWorkRequest.Builder(CustomWorker::class.java)
+            .setInputData(
+                Data.Builder()
+                    .putString("admins", adminsJson)
+                    .build()
+            )
+            .build()
+
+        val workManager = WorkManager.getInstance(applicationContext)
+        workManager.enqueue(workRequest)
+
+        workManager.getWorkInfoByIdLiveData(workRequest.id).observe(this, Observer { workInfo ->
+            if (workInfo != null && workInfo.state == WorkInfo.State.SUCCEEDED) {
+                val resultData = workInfo.outputData
+                Snackbar.make(findViewById(android.R.id.content), "SUCCEEDED: ${resultData.getString("result")}", Snackbar.LENGTH_LONG).show()
+            }
+        })
+
         mobilkoDB.coursesTakenDao().insertAllTakens(coursesTakenList)
         mobilkoDB.instructorDao().insertAllInstructors(instructors)
     }

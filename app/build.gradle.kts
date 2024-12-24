@@ -99,4 +99,7 @@ dependencies {
 
     implementation ("com.daimajia.easing:library:2.0@aar")
     implementation ("com.daimajia.androidanimations:library:2.4@aar")
+
+    val worker_version="2.8.1"
+    implementation ("androidx.work:work-runtime:$worker_version")
 }
