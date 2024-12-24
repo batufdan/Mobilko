@@ -1,6 +1,7 @@
 package com.zeynepturk.project_487.adapter
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -53,10 +54,15 @@ class CustomInstructorRecyclerViewAdapter(private val context: Context,
             if (ins?.isTaken == "Not Taken") {
                 btnTake.text = "Taken"
                 btnTake.visibility = View.VISIBLE
+                val mediaPlayer = MediaPlayer.create(context, R.raw.boom_sound_effect)
                 btnTake.setOnClickListener {
                     btnTake.visibility = View.INVISIBLE
+                    mediaPlayer.start()
                     Log.d("CLICKED", ins.isTaken)
                     onTakeClick(instructor)
+                }
+                mediaPlayer.setOnCompletionListener {
+                    mediaPlayer.release()
                 }
             } else {
                 btnTake.visibility = View.GONE
