@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import org.w3c.dom.Text
 
 class CustomAdminStuRecyclerViewAdapter(
     private val context: Context,
+    private val images: List<Int>,
     private val onItemDelete: (Student) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var recyclerViewItem = emptyList<Student>()
@@ -56,12 +58,14 @@ class CustomAdminStuRecyclerViewAdapter(
             itemHolder.stuName2.text = currentItem.name
             itemHolder.stuMail2.text = currentItem.mail
             itemHolder.stuCgpa2.text = currentItem.cgpa.toString()
+            itemHolder.stuImg2.setImageResource(images[position])
         } else {
             val itemHolder = holder as UnsuccessViewHolder
             itemHolder.stuId.text = currentItem.id.toString()
             itemHolder.stuName.text = currentItem.name
             itemHolder.stuMail.text = currentItem.mail
             itemHolder.stuCgpa.text = currentItem.cgpa.toString()
+            itemHolder.stuImg.setImageResource(images[position])
         }
     }
 
@@ -71,7 +75,7 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuMail2: TextView = itemView.findViewById(R.id.mailTxt2)
         val stuCgpa2: TextView = itemView.findViewById(R.id.cgpaTxt2)
         val layout2: LinearLayout = itemView.findViewById(R.id.stuSuccessLayout)
-
+        val stuImg2: ImageView = itemView.findViewById(R.id.imageView2)
     }
     inner class UnsuccessViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val stuId: TextView = itemView.findViewById(R.id.idTxt)
@@ -79,6 +83,7 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuMail: TextView = itemView.findViewById(R.id.mailTxt)
         val stuCgpa: TextView = itemView.findViewById(R.id.cgpaTxt)
         val layout: LinearLayout = itemView.findViewById(R.id.stuUnsuccessLayout)
+        val stuImg: ImageView = itemView.findViewById(R.id.imageView)
     }
 
 }

@@ -39,6 +39,13 @@ class AdminStuActivity : AppCompatActivity() {
             .build()
     }
 
+    private val images = listOf(
+        R.drawable.kiz1,
+        R.drawable.kiz2,
+        R.drawable.erkek,
+        R.drawable.kiz3
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -51,7 +58,7 @@ class AdminStuActivity : AppCompatActivity() {
         stuViewModel = ViewModelProvider(this).get(AdminStuViewModel::class.java)
 
         //DELETE
-        adapter = CustomAdminStuRecyclerViewAdapter(this) { stu ->
+        adapter = CustomAdminStuRecyclerViewAdapter(this, images) { stu ->
             stuViewModel.studentDAO.deleteStudent(stu)
         }
 
