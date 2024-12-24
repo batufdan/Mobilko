@@ -75,7 +75,7 @@ class AdminStuActivity : AppCompatActivity() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
                 override fun afterTextChanged(s: Editable?) {
-                    filterStudents(s.toString())
+
                 }
         })
 
@@ -92,10 +92,6 @@ class AdminStuActivity : AppCompatActivity() {
 
     private fun addItem(){
         createDialogAdd()
-    }
-
-    private fun updateTaken(stuID: Int){
-        createDialogUpdate(stuID)
     }
 
     fun createDialogAdd() {
@@ -116,64 +112,5 @@ class AdminStuActivity : AppCompatActivity() {
             customDialog.dismiss()
         })
         customDialog.show()
-    }
-
-    fun createDialogUpdate(stuID: Int){
-        var customDialog = Dialog(this)
-        customDialog.setContentView(R.layout.dialog_stu_courses)
-        var btnClose: Button = customDialog.findViewById(R.id.cancel)
-        var btnSave: Button = customDialog.findViewById(R.id.save)
-        var spinner : Spinner = customDialog.findViewById(R.id.spinnerCourses)
-        var attendance: TextView = customDialog.findViewById(R.id.attEdit)
-        var grade: TextView = customDialog.findViewById(R.id.gradeEdit)
-
-        btnSave.setOnClickListener {
-            val taken: LiveData<List<CoursesTaken>> = mobilkoDB.coursesTakenDao().getAllTakenById(stuID)
-            taken.observe(this, Observer { coursesTakenList ->
-                if (coursesTakenList != null) {
-                    // coursesCode değerlerini al
-                    val courseCodes: ArrayList<String> = ArrayList(coursesTakenList.map { it.coursesCode })
-
-                    // Spinner için ArrayAdapter oluştur
-                    val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, courseCodes)
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner.adapter = adapter
-                }
-            })
-
-            var selectedCourse = ""
-            spinner.setOnItemSelectedListener(object: AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    selectedCourse = spinner.getSelectedItem().toString()
-                }
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            })
-            var coursesTaken = CoursesTaken(selectedCourse, stuID, attendance.text.toString().toInt(), grade.text.toString().toInt())
-            mobilkoDB.coursesTakenDao().updateTaken(coursesTaken)
-            customDialog.dismiss()
-        }
-
-        btnClose.setOnClickListener { customDialog.dismiss() }
-
-        customDialog.show()
-    }
-
-
-    private fun filterStudents(query: String) {
-        stuViewModel.readAllData.observe(this) { students ->
-            if (query.isEmpty()) {
-                adapter.setData(students)
-            } else {
-                var filteredCourses = students.filter {
-                    it.name.contains(query, ignoreCase = true)
-                }
-                adapter.setData(filteredCourses as MutableList<Student>)
-            }
-        }
     }
 }
