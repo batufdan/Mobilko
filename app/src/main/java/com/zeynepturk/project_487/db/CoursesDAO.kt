@@ -28,7 +28,7 @@ interface CoursesDAO {
     // LiveData means aware of the modification
 
     @Query("SELECT * FROM Courses WHERE courseCode =:id")
-    fun getCoursesById(id: Int): Courses
+    fun getCoursesById(id: String): Courses
 
     @Query("SELECT * FROM Courses WHERE courseName LIKE :searchKey OR courseCode LIKE :searchKey")
     fun getCourseBySearchKey(searchKey: String): Flow<List<Courses>>

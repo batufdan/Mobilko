@@ -77,6 +77,12 @@
                     android:text="TextView" />
 
                 <TextView
+                    android:id="@+id/temp"
+                    android:layout_width="match_parent"
+                    android:layout_height="54dp"
+                    android:text="TextView" />
+
+                <TextView
                     android:id="@+id/courseTableTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

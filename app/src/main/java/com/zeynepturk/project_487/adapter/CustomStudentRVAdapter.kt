@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,11 +31,16 @@ class CustomStudentRVAdapter(private val context: Context, private val onItemCli
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        val currentItem = recyclerViewItem[position]
+        val itemHolder = holder as CourseViewHolder
+        itemHolder.courseCode.text = currentItem.courseCode
+        itemHolder.courseName.text = currentItem.courseName
     }
 
     inner class CourseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val courseCode: TextView = itemView.findViewById(R.id.courseCodeTxt)
         val courseName: TextView = itemView.findViewById(R.id.courseNameTxt)
+        val layout: LinearLayout = itemView.findViewById(R.id.linearLayoutStudent)
+
     }
 }
