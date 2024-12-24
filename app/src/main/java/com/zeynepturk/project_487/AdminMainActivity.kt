@@ -6,8 +6,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.bumptech.glide.Glide
 import com.zeynepturk.project_487.databinding.ActivityAdminMainBinding
 import com.zeynepturk.project_487.model.Student
+
 
 class AdminMainActivity : AppCompatActivity() {
     lateinit var bindingAdmin: ActivityAdminMainBinding
@@ -28,5 +30,9 @@ class AdminMainActivity : AppCompatActivity() {
         bindingAdmin.btnCourse.setOnClickListener {
             startActivity(Intent(this, AdminCourseActivity::class.java))
         }
+        Glide.with(this)
+            .load(R.drawable.mobilko)
+            .circleCrop()
+            .into(bindingAdmin.logoImage);
     }
 }

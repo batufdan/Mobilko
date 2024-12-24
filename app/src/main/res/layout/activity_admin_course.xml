@@ -11,20 +11,23 @@
         android:id="@+id/search"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
         android:layout_marginTop="60dp"
+        android:layout_marginEnd="4dp"
         android:layout_marginBottom="28dp"
         android:ems="10"
         android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/addCourseBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/searchCourseTxt"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/addCourseBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="1dp"
         android:text="Add Course"
         app:layout_constraintBottom_toTopOf="@+id/courseList"
@@ -33,24 +36,44 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courseList"
-        android:layout_width="0dp"
+        android:layout_width="417dp"
         android:layout_height="0dp"
-        android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="69dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnCourseBack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addCourseBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/searchCourseTxt" />
 
     <Button
         android:id="@+id/btnCourseBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="61dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginEnd="136dp"
+        android:layout_marginBottom="90dp"
         android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/addCourseBtn"
+        app:layout_constraintStart_toStartOf="@+id/searchCourseTxt"
+        app:layout_constraintTop_toBottomOf="@+id/courseList" />
+
+    <TextView
+        android:id="@+id/searchCourseTxt"
+        android:layout_width="190dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="75dp"
+        android:text="If you want to search any course..."
+        android:textColor="#CC1654"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/courseList"
-        app:layout_constraintEnd_toEndOf="@+id/courseList" />
+        app:layout_constraintEnd_toStartOf="@+id/search"
+        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,33 +5,84 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".AdminMainActivity">
 
+    <!-- Header Section -->
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
+        android:layout_marginTop="40dp"
+        android:padding="16dp"
         android:text="Welcome to Mobilko"
+        android:textAlignment="center"
+        android:textColor="#6200EE"
+        android:textSize="28sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnStu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:text="Students"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/logoImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="Application Logo"
+        android:src="@drawable/mobilko"
+        app:shapeAppearanceOverlay="@style/CircularImageShape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView" />
 
-    <Button
-        android:id="@+id/btnCourse"
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnStu"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="85dp"
+        android:backgroundTint="#03DAC5"
+        app:cornerRadius="16dp"
+        android:elevation="4dp"
+        android:text="Students"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnCourse"
+        app:layout_constraintTop_toBottomOf="@+id/logoImage" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCourse"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#6200EE"
+        app:cornerRadius="16dp"
+        android:elevation="4dp"
         android:text="Courses"
-        app:layout_constraintStart_toStartOf="@+id/btnStu"
-        app:layout_constraintTop_toBottomOf="@+id/btnStu" />
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@id/btnStu"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoImage" />
+
+    <!-- Footer -->
+    <TextView
+        android:id="@+id/footerText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="Explore students' account easily!!"
+        android:textAlignment="center"
+        android:textColor="#808080"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
