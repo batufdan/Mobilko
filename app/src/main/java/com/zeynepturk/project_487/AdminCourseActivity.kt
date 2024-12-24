@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.zeynepturk.project_487.adapter.CustomAdminCourseRecyclerViewAdapter
 import com.zeynepturk.project_487.databinding.ActivityAdminCourseBinding
 import com.zeynepturk.project_487.databinding.DialogCourseAddBinding
@@ -67,8 +69,37 @@ class AdminCourseActivity : AppCompatActivity() {
             showAddCourseDialog()
         }
 
+        swipeToDelete()
 
 
+    }
+
+    private fun swipeToDelete() {
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val course = courseAdapter.getCourseAt(position)
+
+                courseViewModel.deleteCourse(course) { rowsDeleted ->
+                    if (rowsDeleted > 0) {
+                        Toast.makeText(this@AdminCourseActivity, "Course deleted", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this@AdminCourseActivity, "Error deleting course", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(bindingAdminCourse.courseList)
     }
 
 

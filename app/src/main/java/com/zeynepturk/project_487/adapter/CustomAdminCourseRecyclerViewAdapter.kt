@@ -62,4 +62,8 @@ class CustomAdminCourseRecyclerViewAdapter(private val context: Context, private
         }
     }
 
+    fun getCourseAt(position: Int): Courses {
+        return courses[position]
+    }
+
 }
