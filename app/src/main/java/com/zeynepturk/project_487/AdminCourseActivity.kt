@@ -69,6 +69,10 @@ class AdminCourseActivity : AppCompatActivity() {
 
         swipeToDelete()
 
+        bindingAdminCourse.btnCourseBack.setOnClickListener {
+            finish()
+        }
+
 
     }
 
