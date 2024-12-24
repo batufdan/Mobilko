@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -30,8 +31,6 @@ import com.zeynepturk.project_487.model.Student
 
 class AdminStuActivity : AppCompatActivity() {
     lateinit var bindingAdminStu: ActivityAdminStuBinding
-
-    // lateinit var filteredList : MutableList<Student>
     lateinit var adapter: CustomAdminStuRecyclerViewAdapter
     lateinit var stuViewModel: AdminStuViewModel
     lateinit var students: ArrayList<Student>
@@ -60,10 +59,12 @@ class AdminStuActivity : AppCompatActivity() {
         bindingAdminStu.stuList.layoutManager = LinearLayoutManager(this)
         stuViewModel = ViewModelProvider(this).get(AdminStuViewModel::class.java)
 
-        //DELETE
-        adapter = CustomAdminStuRecyclerViewAdapter(this, images) { stu ->
-            stuViewModel.studentDAO.deleteStudent(stu)
-        }
+        adapter = CustomAdminStuRecyclerViewAdapter(this, images,
+            onItemDelete = {student ->
+                stuViewModel.studentDAO.deleteStudent(student)
+            },
+            onEditClicked = {student -> updateTaken(student.id) })
+
 
         bindingAdminStu.stuList.adapter = adapter
         val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(adapter))
@@ -129,48 +130,47 @@ class AdminStuActivity : AppCompatActivity() {
         var customDialog = Dialog(this)
         customDialog.setContentView(R.layout.dialog_stu_courses)
         var btnClose: Button = customDialog.findViewById(R.id.cancel)
-        var btnSave: Button = customDialog.findViewById(R.id.save)
+        var btnSave: Button = customDialog.findViewById(R.id.saveBtn)
         var spinner: Spinner = customDialog.findViewById(R.id.spinnerCourses)
         var attendance: TextView = customDialog.findViewById(R.id.attEdit)
         var grade: TextView = customDialog.findViewById(R.id.gradeEdit)
+        var selectedCourse = ""
+        val taken: LiveData<List<CoursesTaken>> =
+            mobilkoDB.coursesTakenDao().getAllTakenById(stuID)
 
+        taken.observe(this, Observer { coursesTakenList ->
+            if (coursesTakenList != null) {
+                val courseCodes: ArrayList<String> =
+                    ArrayList(coursesTakenList.map { it.coursesCode })
+
+                val adapter =
+                    ArrayAdapter(this, android.R.layout.simple_spinner_item, courseCodes)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinner.adapter = adapter
+            }
+        })
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedCourse = parent?.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
         btnSave.setOnClickListener {
-            val taken: LiveData<List<CoursesTaken>> =
-                mobilkoDB.coursesTakenDao().getAllTakenById(stuID)
-            taken.observe(this, Observer { coursesTakenList ->
-                if (coursesTakenList != null) {
-                    // coursesCode değerlerini al
-                    val courseCodes: ArrayList<String> =
-                        ArrayList(coursesTakenList.map { it.coursesCode })
-
-                    // Spinner için ArrayAdapter oluştur
-                    val adapter =
-                        ArrayAdapter(this, android.R.layout.simple_spinner_item, courseCodes)
-                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                    spinner.adapter = adapter
-                }
-            })
-
-            var selectedCourse = ""
-            spinner.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    selectedCourse = spinner.getSelectedItem().toString()
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            })
-            var coursesTaken = CoursesTaken(
+            val coursesTaken = CoursesTaken(
                 selectedCourse,
                 stuID,
                 attendance.text.toString().toInt(),
                 grade.text.toString().toInt()
             )
             mobilkoDB.coursesTakenDao().updateTaken(coursesTaken)
+            Toast.makeText(this, "$selectedCourse is updated for $stuID with att = ${attendance.text} and grade = ${grade.text}", Toast.LENGTH_SHORT).show()
             customDialog.dismiss()
         }
 

@@ -43,4 +43,12 @@
         android:layout_weight="1"
         android:text="TextView" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:contentDescription="Edit"
+        app:srcCompat="@drawable/baseline_edit_24" />
+
 </LinearLayout>

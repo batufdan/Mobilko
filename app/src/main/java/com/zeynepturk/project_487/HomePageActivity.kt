@@ -126,15 +126,15 @@ class HomePageActivity : AppCompatActivity() {
 
         Collections.addAll(
             coursesTakenList,
-            CoursesTaken("CTIS-487", 1, 80, 100),
-            CoursesTaken("CTIS-365", 1, 50, 70),
-            CoursesTaken("CTIS-359", 1, 90, 30),
-            CoursesTaken("CTIS-487", 2, 40, 75),
-            CoursesTaken("CTIS-365", 2, 10, 56),
-            CoursesTaken("COMD-358", 3, 100, 68),
-            CoursesTaken("HIST-200", 3, 80, 100),
-            CoursesTaken("CTIS-487", 4, 100, 70),
-            CoursesTaken("CTIS-359", 4, 90, 80)
+            CoursesTaken("CTIS-487", 0, 80, 100),
+            CoursesTaken("CTIS-365", 0, 50, 70),
+            CoursesTaken("CTIS-359", 0, 90, 30),
+            CoursesTaken("CTIS-487", 1, 40, 75),
+            CoursesTaken("CTIS-365", 1, 10, 56),
+            CoursesTaken("COMD-358", 2, 100, 68),
+            CoursesTaken("HIST-200", 2, 80, 100),
+            CoursesTaken("CTIS-487", 3, 100, 70),
+            CoursesTaken("CTIS-359", 3, 90, 80)
         )
     }
 

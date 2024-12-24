@@ -52,8 +52,6 @@ class AdminCourseActivity : AppCompatActivity() {
         }
 
 
-
-
         bindingAdminCourse.search.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 

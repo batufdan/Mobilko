@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.zeynepturk.project_487.R
 import com.zeynepturk.project_487.model.Student
 import org.w3c.dom.Text
@@ -15,7 +16,8 @@ import org.w3c.dom.Text
 class CustomAdminStuRecyclerViewAdapter(
     private val context: Context,
     private val images: List<Int>,
-    private val onItemDelete: (Student) -> Unit
+    private val onItemDelete: (Student) -> Unit,
+    private val onEditClicked: (Student) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var recyclerViewItem = emptyList<Student>()
     fun setData(items: MutableList<Student>) {
@@ -59,6 +61,9 @@ class CustomAdminStuRecyclerViewAdapter(
             itemHolder.stuMail2.text = currentItem.mail
             itemHolder.stuCgpa2.text = currentItem.cgpa.toString()
             itemHolder.stuImg2.setImageResource(images[position])
+            itemHolder.fabUpdate2.setOnClickListener {
+                onEditClicked(currentItem)
+            }
         } else {
             val itemHolder = holder as UnsuccessViewHolder
             itemHolder.stuId.text = currentItem.id.toString()
@@ -66,6 +71,9 @@ class CustomAdminStuRecyclerViewAdapter(
             itemHolder.stuMail.text = currentItem.mail
             itemHolder.stuCgpa.text = currentItem.cgpa.toString()
             itemHolder.stuImg.setImageResource(images[position])
+            itemHolder.fabUpdate.setOnClickListener {
+                onEditClicked(currentItem)
+            }
         }
     }
 
@@ -76,6 +84,7 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuCgpa2: TextView = itemView.findViewById(R.id.cgpaTxt2)
         val layout2: LinearLayout = itemView.findViewById(R.id.stuSuccessLayout)
         val stuImg2: ImageView =itemView.findViewById(R.id.imageView2)
+        val fabUpdate2: FloatingActionButton = itemView.findViewById(R.id.fabUpdate)
     }
     inner class UnsuccessViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val stuId: TextView = itemView.findViewById(R.id.idTxt)
@@ -84,6 +93,7 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuCgpa: TextView = itemView.findViewById(R.id.cgpaTxt)
         val layout: LinearLayout = itemView.findViewById(R.id.stuUnsuccessLayout)
         val stuImg: ImageView =itemView.findViewById(R.id.imageView)
+        val fabUpdate: FloatingActionButton = itemView.findViewById(R.id.fabUpdate)
     }
 
 }
