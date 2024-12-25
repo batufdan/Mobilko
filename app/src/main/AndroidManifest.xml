@@ -32,9 +32,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ExamScheduleActivity"
-            android:exported="false" />
-        <activity
             android:name=".OfficeHourActivity"
             android:exported="false" />
         <activity
