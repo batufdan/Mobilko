@@ -19,21 +19,26 @@
             android:layout_height="wrap_content"
             android:text="Instructor Name"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#0791A3" />
 
         <TextView
             android:id="@+id/tvCourseCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Course Code"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textColor="#C21E54"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvOfficeHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Office Hour"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:textColor="#C21E54"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/btnTake"

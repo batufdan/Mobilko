@@ -7,73 +7,101 @@
     android:layout_height="match_parent"
     tools:context=".AdminStuActivity">
 
-    <EditText
-        android:id="@+id/search"
-        android:layout_width="wrap_content"
+        <!-- Informative Text -->
+    <TextView
+        android:id="@+id/searchCourseTxt"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="28dp"
-        android:ems="10"
-        android:inputType="text"
-        android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/addCourseBtn"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Search for a course or add a new one"
+        android:textColor="#CC1654"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/searchCourseTxt"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/addCourseBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="1dp"
-        android:text="Add Course"
-        app:layout_constraintBottom_toTopOf="@+id/courseList"
-        app:layout_constraintEnd_toEndOf="@+id/search"
-        app:layout_constraintTop_toBottomOf="@+id/search" />
+    <!-- Add Course Button -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="331dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#6200EE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.612"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchCourseTxt">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:hint="Search by course name"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textSize="16sp"
+            tools:ignore="MissingConstraints" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+    android:id="@+id/addCourseBtn"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:text="Add Course"
+    android:backgroundTint="#6200EE"
+    android:textColor="@android:color/white"
+    app:cornerRadius="16dp"
+    app:icon="@drawable/plus"
+    app:iconPadding="8dp"
+    app:iconTint="@android:color/white"
+    app:layout_constraintTop_toBottomOf="@+id/searchLayout"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Course List -->
+    <com.google.android.material.card.MaterialCardView
+    android:id="@+id/courseListCard"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    android:backgroundTint="#FFFFFF"
+    app:layout_constraintTop_toBottomOf="@+id/addCourseBtn"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintBottom_toTopOf="@+id/btnCourseBack">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/courseList"
-        android:layout_width="417dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="69dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCourseBack"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchCourseTxt" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:clipToPadding="false" />
+    </com.google.android.material.card.MaterialCardView>
 
-    <Button
-        android:id="@+id/btnCourseBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginEnd="136dp"
-        android:layout_marginBottom="90dp"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/addCourseBtn"
-        app:layout_constraintStart_toStartOf="@+id/searchCourseTxt"
-        app:layout_constraintTop_toBottomOf="@+id/courseList" />
-
-    <TextView
-        android:id="@+id/searchCourseTxt"
-        android:layout_width="190dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="75dp"
-        android:text="If you want to search any course..."
-        android:textColor="#CC1654"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/courseList"
-        app:layout_constraintEnd_toStartOf="@+id/search"
-        app:layout_constraintHorizontal_bias="0.055"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Back Button -->
+    <com.google.android.material.button.MaterialButton
+    android:id="@+id/btnCourseBack"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="16dp"
+    android:text="Back"
+    android:backgroundTint="#B71C1C"
+    android:textColor="@android:color/white"
+    app:cornerRadius="16dp"
+    app:icon="@drawable/back_icon"
+    app:iconPadding="8dp"
+    app:iconTint="@android:color/white"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

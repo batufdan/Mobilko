@@ -1,15 +1,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@android:color/white"
+    android:elevation="4dp">
 
+    <!-- Course Details Section -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="3"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingEnd="16dp">
 
         <TextView
             android:id="@+id/courseCode"
@@ -17,27 +21,36 @@
             android:layout_height="wrap_content"
             android:text="Course Code"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="#C21E54" />
 
         <TextView
             android:id="@+id/tvcourseName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Course Name"
-            android:textSize="14sp" />
+            android:textColor="#13568B"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvInstructor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Instructor" />
+            android:text="Instructor"
+            android:textColor="#13568B"
+            android:textSize="14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
+    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabUpdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:contentDescription="Edit"
-        app:srcCompat="@drawable/baseline_edit_24" />
+        android:layout_gravity="center"
+        android:tint="@android:color/white"
+        android:backgroundTint="#E42968"
+        app:srcCompat="@drawable/baseline_edit_24"
+        android:contentDescription="Edit" />
 </LinearLayout>
