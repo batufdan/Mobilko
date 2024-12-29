@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import androidx.room.Room
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
@@ -52,6 +53,8 @@ class HomePageActivity : AppCompatActivity() {
             .create(StudentService::class.java)
 
         students = ArrayList<Student>()
+
+        //clearData()    // Test datalarını temizlemek için
         getData()
 
 
@@ -186,5 +189,11 @@ class HomePageActivity : AppCompatActivity() {
 
         mobilkoDB.coursesTakenDao().insertAllTakens(coursesTakenList)
         mobilkoDB.instructorDao().insertAllInstructors(instructors)
+    }
+
+    private fun clearData() {
+        // Student Table
+        mobilkoDB.studentDao().deleteAllStudents()
+        mobilkoDB.studentDao().resetAutoIncrement()
     }
 }

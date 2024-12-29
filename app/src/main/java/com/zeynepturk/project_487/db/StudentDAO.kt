@@ -21,6 +21,9 @@ interface StudentDAO {
     @Delete
     fun deleteStudent(student: Student): Int
 
+    @Query("DELETE FROM student")
+    fun deleteAllStudents()
+
     @Query("SELECT * FROM student ORDER BY id ASC")
     fun getAllStudents(): LiveData<MutableList<Student>>
 
@@ -37,4 +40,6 @@ interface StudentDAO {
         }
     }
 
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'student'")
+    fun resetAutoIncrement()
 }

@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "student")
 class Student(
-    @PrimaryKey(autoGenerate = false) // True yapınca patladı?
+    @PrimaryKey(autoGenerate = true) // True yapınca patladı?
     @SerializedName("id") var id: Int = 0,
     @SerializedName("pass") var pass: String,
     @SerializedName("name") var name: String,

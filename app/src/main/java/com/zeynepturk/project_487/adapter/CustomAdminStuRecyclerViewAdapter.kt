@@ -15,7 +15,7 @@ import org.w3c.dom.Text
 
 class CustomAdminStuRecyclerViewAdapter(
     private val context: Context,
-    private val images: List<Int>,
+    //private val images: List<Int>,
     private val onItemDelete: (Student) -> Unit,
     private val onEditClicked: (Student) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -60,7 +60,7 @@ class CustomAdminStuRecyclerViewAdapter(
             itemHolder.stuName2.text = currentItem.name
             itemHolder.stuMail2.text = currentItem.mail
             itemHolder.stuCgpa2.text = currentItem.cgpa.toString()
-            itemHolder.stuImg2.setImageResource(images[position])
+            //itemHolder.stuImg2.setImageResource(images[position])
             itemHolder.fabUpdate2.setOnClickListener {
                 onEditClicked(currentItem)
             }
@@ -70,7 +70,7 @@ class CustomAdminStuRecyclerViewAdapter(
             itemHolder.stuName.text = currentItem.name
             itemHolder.stuMail.text = currentItem.mail
             itemHolder.stuCgpa.text = currentItem.cgpa.toString()
-            itemHolder.stuImg.setImageResource(images[position])
+            //itemHolder.stuImg.setImageResource(images[position])
             itemHolder.fabUpdate.setOnClickListener {
                 onEditClicked(currentItem)
             }
@@ -83,7 +83,7 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuMail2: TextView = itemView.findViewById(R.id.mailTxt2)
         val stuCgpa2: TextView = itemView.findViewById(R.id.cgpaTxt2)
         val layout2: LinearLayout = itemView.findViewById(R.id.stuSuccessLayout)
-        val stuImg2: ImageView =itemView.findViewById(R.id.imageView2)
+        //val stuImg2: ImageView =itemView.findViewById(R.id.imageView2)
         val fabUpdate2: FloatingActionButton = itemView.findViewById(R.id.fabUpdate)
     }
     inner class UnsuccessViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -92,7 +92,7 @@ class CustomAdminStuRecyclerViewAdapter(
         val stuMail: TextView = itemView.findViewById(R.id.mailTxt)
         val stuCgpa: TextView = itemView.findViewById(R.id.cgpaTxt)
         val layout: LinearLayout = itemView.findViewById(R.id.stuUnsuccessLayout)
-        val stuImg: ImageView =itemView.findViewById(R.id.imageView)
+        //val stuImg: ImageView =itemView.findViewById(R.id.imageView)
         val fabUpdate: FloatingActionButton = itemView.findViewById(R.id.fabUpdate)
     }
 

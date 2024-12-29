@@ -41,12 +41,12 @@ class AdminStuActivity : AppCompatActivity() {
             .build()
     }
 
-    private val images = listOf(
-        R.drawable.kiz1,
-        R.drawable.kiz2,
-        R.drawable.erkek,
-        R.drawable.kiz3
-    )
+//    private val images = listOf(
+//        R.drawable.kiz1,
+//        R.drawable.kiz2,
+//        R.drawable.erkek,
+//        R.drawable.kiz3
+//    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +59,7 @@ class AdminStuActivity : AppCompatActivity() {
         bindingAdminStu.stuList.layoutManager = LinearLayoutManager(this)
         stuViewModel = ViewModelProvider(this).get(AdminStuViewModel::class.java)
 
-        adapter = CustomAdminStuRecyclerViewAdapter(this, images,
+        adapter = CustomAdminStuRecyclerViewAdapter(this,
             onItemDelete = {student ->
                 stuViewModel.studentDAO.deleteStudent(student)
             },
