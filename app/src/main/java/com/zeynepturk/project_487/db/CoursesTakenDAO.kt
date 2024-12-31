@@ -33,6 +33,9 @@ interface CoursesTakenDAO {
     @Query("SELECT * FROM coursesTaken WHERE stuID = :studentId")
     fun getCoursesTakenByStudentId(studentId: Int): List<CoursesTaken>
 
+    @Query("SELECT coursesCode FROM coursesTaken WHERE stuID = :studentId")
+    fun getCourseCodesById(studentId: Int) : List<String>
+
     @Query("SELECT * from coursesTaken WHERE stuID = :id AND coursesCode = :code")
     fun getAttGradeByIdAndCode(id: Int, code: String) : CoursesTaken
 

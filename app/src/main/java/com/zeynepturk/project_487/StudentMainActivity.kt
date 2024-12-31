@@ -1,35 +1,29 @@
 package com.zeynepturk.project_487
 
-import android.R
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.Button
+import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.map
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
-import com.zeynepturk.project_487.adapter.CustomInstructorRecyclerViewAdapter
 import com.zeynepturk.project_487.adapter.CustomStudentRVAdapter
 import com.zeynepturk.project_487.databinding.ActivityStuMainBinding
 import com.zeynepturk.project_487.db.MobilkoRoomDatabase
 import com.zeynepturk.project_487.model.Courses
 import com.zeynepturk.project_487.model.CoursesTaken
-import com.zeynepturk.project_487.model.Instructor
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class StudentMainActivity : AppCompatActivity() {
     lateinit var bindingStu: ActivityStuMainBinding
     lateinit var taken: LiveData<List<CoursesTaken>>
     lateinit var adapter: CustomStudentRVAdapter
+    lateinit var customDialog: Dialog
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
         Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")
             .allowMainThreadQueries()
@@ -86,5 +80,37 @@ class StudentMainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        bindingStu.enrollBtn.setOnClickListener{
+            createDialog(stuID)
+        }
+
+    }
+
+
+    fun createDialog(stuId : Int) {
+        customDialog = Dialog(this)
+        customDialog.setContentView(R.layout.dialog_enroll)
+        var btnOk : Button = customDialog.findViewById(R.id.button2)
+        var btnCancel: Button = customDialog.findViewById(R.id.button3)
+        var spinner: Spinner = customDialog.findViewById(R.id.spinner2)
+
+        val courses = mobilkoDB.coursesDao().getCodes()
+        val taken = mobilkoDB.coursesTakenDao().getCourseCodesById(stuId)
+
+        val notTakenCourses = courses.filter { it !in taken }
+
+        btnOk.setOnClickListener { Log.d("OK CLICKED" , "CLICKED") }
+        Log.d("NOT TAKEN", notTakenCourses.toString())
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item,
+            notTakenCourses
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        btnCancel.setOnClickListener { customDialog.dismiss() }
+        customDialog.show()
     }
 }

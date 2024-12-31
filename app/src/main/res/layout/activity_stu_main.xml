@@ -137,5 +137,16 @@
                     android:textColor="@android:color/white"
                     app:cornerRadius="16dp" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/enrollBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#2B622D"
+                    android:text="Enroll Course"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:cornerRadius="16dp" />
+
         </LinearLayout>
 </ScrollView>
