@@ -23,7 +23,6 @@ import kotlinx.coroutines.withContext
 
 class CustomInstructorRecyclerViewAdapter(private val context: Context,
                                           private val instructors: List<Instructor>,
-                                          private val images: List<Int>,
                                           private val instructorDAO: InstructorDAO,
                                           private val onTakeClick: (Instructor) -> Unit) : RecyclerView.Adapter<CustomInstructorRecyclerViewAdapter.InstructorViewHolder>(){
 
@@ -35,7 +34,6 @@ class CustomInstructorRecyclerViewAdapter(private val context: Context,
     ) {
         val instructor = instructors[position]
         holder.bind(instructor, position)
-        holder
     }
 
     override fun getItemCount(): Int = instructors.size
