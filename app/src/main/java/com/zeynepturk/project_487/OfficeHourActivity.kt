@@ -33,6 +33,16 @@ class OfficeHourActivity : AppCompatActivity() {
             .build()
     }
 
+    private val images = listOf(
+        R.drawable.kiz1,
+        R.drawable.cuneyt_sevgi,
+        R.drawable.ahmet_muhtar,
+        R.drawable.erkek,
+        R.drawable.kiz2,
+        R.drawable.kiz3,
+        R.drawable.kudret_emir
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -68,7 +78,7 @@ class OfficeHourActivity : AppCompatActivity() {
                         foundInstructors.add(instructor)
                     }
                 }
-                adapter = CustomInstructorRecyclerViewAdapter(this, foundInstructors, mobilkoDB.instructorDao()) { instructor ->
+                adapter = CustomInstructorRecyclerViewAdapter(this, foundInstructors, images, mobilkoDB.instructorDao()) { instructor ->
                     handleTakeClick(instructor) }
                 binding.instructorRecycler.layoutManager = LinearLayoutManager(this)
                 binding.instructorRecycler.adapter = adapter

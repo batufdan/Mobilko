@@ -158,13 +158,13 @@ class HomePageActivity : AppCompatActivity() {
         )
 
         instructors = listOf(
-            Instructor(1, "Neşe Özçelik", "Monday 14:30-15:20", "Not Taken", "nozcelik@bilkent.edu.tr"),
-            Instructor(2, "Cüneyt Sevgi", "Monday 13:30-14:20", "Not Taken", "csevgi@bilkent.edu.tr"),
-            Instructor(3, "Ahmet Muhtar Güloğlu", "Tuesday 11:30-12:20", "Not Taken", "guloglua@fen.bilkent.edu.tr"),
-            Instructor(4, "Seyid Amjad", "Thursday 11:30-12:20", "Not Taken", "amjadali@bilkent.edu.tr"),
-            Instructor(5, "Leyla Sezer", "Friday 11:30-12:20", "Taken", "sezerleyla@bilkent.edu.tr"),
-            Instructor(6, "Özen Baş", "Friday 10:30-11:20", "Taken", "ozenbas@bilkent.edu.tr"),
-            Instructor(7, "Kudret Emiroğlu", "Wednesday 11:30-12:20", "Not Taken", "kudretemiroglu@bilkent.edu.tr")
+            Instructor(1, "Neşe Özçelik", "Monday 14:30-15:20", "Not Taken", "nozcelik@bilkent.edu.tr", R.drawable.kiz1),
+            Instructor(2, "Cüneyt Sevgi", "Monday 13:30-14:20", "Not Taken", "csevgi@bilkent.edu.tr", R.drawable.cuneyt_sevgi),
+            Instructor(3, "Ahmet Muhtar Güloğlu", "Tuesday 11:30-12:20", "Not Taken", "guloglua@fen.bilkent.edu.tr", R.drawable.ahmet_muhtar),
+            Instructor(4, "Seyid Amjad", "Thursday 11:30-12:20", "Not Taken", "amjadali@bilkent.edu.tr", R.drawable.erkek),
+            Instructor(5, "Leyla Sezer", "Friday 11:30-12:20", "Taken", "sezerleyla@bilkent.edu.tr", R.drawable.kiz2),
+            Instructor(6, "Özen Baş", "Friday 10:30-11:20", "Taken", "ozenbas@bilkent.edu.tr", R.drawable.kiz3),
+            Instructor(7, "Kudret Emiroğlu", "Wednesday 11:30-12:20", "Not Taken", "kudretemiroglu@bilkent.edu.tr", R.drawable.kudret_emir)
         )
     }
 

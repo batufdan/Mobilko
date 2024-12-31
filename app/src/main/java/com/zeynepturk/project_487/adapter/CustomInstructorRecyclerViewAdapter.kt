@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ import kotlinx.coroutines.withContext
 
 class CustomInstructorRecyclerViewAdapter(private val context: Context,
                                           private val instructors: List<Instructor>,
+                                          private val images: List<Int>,
                                           private val instructorDAO: InstructorDAO,
                                           private val onTakeClick: (Instructor) -> Unit) : RecyclerView.Adapter<CustomInstructorRecyclerViewAdapter.InstructorViewHolder>(){
 
@@ -32,7 +34,8 @@ class CustomInstructorRecyclerViewAdapter(private val context: Context,
     override fun onBindViewHolder(holder: CustomInstructorRecyclerViewAdapter.InstructorViewHolder, position: Int
     ) {
         val instructor = instructors[position]
-        holder.bind(instructor)
+        holder.bind(instructor, position)
+        holder
     }
 
     override fun getItemCount(): Int = instructors.size
@@ -42,17 +45,19 @@ class CustomInstructorRecyclerViewAdapter(private val context: Context,
         private val tvCourseCode: TextView = itemView.findViewById(R.id.tvCourseCode)
         private val tvOfficeHour: TextView = itemView.findViewById(R.id.tvOfficeHour)
         private val btnTake: Button = itemView.findViewById(R.id.btnTake)
+        private val img: ImageView = itemView.findViewById(R.id.imageView2)
 
-        fun bind(instructor: Instructor) {
+        fun bind(instructor: Instructor, position: Int) {
             tvInstructorName.text = instructor.instructorName
             tvCourseCode.text = "Course Code: ${instructor.instructorID}"
             tvOfficeHour.text = "Office Hour: ${instructor.instructorOfficeHour}"
-
+            img.setImageResource(instructor.img)
 
             val ins = instructorDAO.getInstructorByName(instructor.instructorName)
             Log.d("INSTRUCTOR NAME", ins?.instructorName.toString() + ins?.isTaken)
             Log.d("OLD INST NAME", instructor.instructorName)
 
+            //Deneme için
             if (ins?.isTaken == "Not Taken") {
                 btnTake.text = "Taken"
                 btnTake.visibility = View.VISIBLE

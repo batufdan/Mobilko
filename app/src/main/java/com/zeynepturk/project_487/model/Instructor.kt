@@ -10,7 +10,8 @@ class Instructor(
     var instructorName: String,
     var instructorOfficeHour: String,
     var isTaken: String,
-    var instructorMail: String
+    var instructorMail: String,
+    var img: Int
 ) {
     override fun toString(): String {
         return "Name = $instructorName, officeHour = $instructorOfficeHour"
