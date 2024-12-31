@@ -10,8 +10,8 @@ import com.zeynepturk.project_487.model.Student
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class StudentMainViewModel(application: Application) : AndroidViewModel(application) {
-    val readAllData: LiveData<MutableList<Student>>
+class StudentMainViewModel(application: Application, stuId: Int) : AndroidViewModel(application) {
+    val readAllData: LiveData<MutableList<CoursesTaken>>
     val studentDAO: StudentDAO
     val coursesTakenDAO: CoursesTakenDAO
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
@@ -23,7 +23,7 @@ class StudentMainViewModel(application: Application) : AndroidViewModel(applicat
     init {
         coursesTakenDAO = mobilkoDB.coursesTakenDao()
         studentDAO= mobilkoDB.studentDao()
-        readAllData = studentDAO.getAllStudents()
+        readAllData = coursesTakenDAO.getAllTakenById(stuId)
     }
 
     fun addTakenCourse(takenCourse: CoursesTaken){

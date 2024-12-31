@@ -25,7 +25,7 @@ interface CoursesTakenDAO {
     fun deleteAllTakens()
 
     @Query("SELECT * FROM CoursesTaken WHERE stuID = :id ORDER BY coursesCode ASC")
-    fun getAllTakenById(id: Int): LiveData<List<CoursesTaken>>
+    fun getAllTakenById(id: Int): LiveData<MutableList<CoursesTaken>>
 
     @Query("SELECT * FROM coursesTaken WHERE coursesCode =:id")
     fun getTakenById(id: Int): CoursesTaken
