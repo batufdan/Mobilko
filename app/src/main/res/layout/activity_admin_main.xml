@@ -30,7 +30,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="40dp"
         android:contentDescription="Application Logo"
-        android:src="@drawable/mobilko"
+        android:src="@drawable/blue_graduation_cap_icon"
         app:shapeAppearanceOverlay="@style/CircularImageShape"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

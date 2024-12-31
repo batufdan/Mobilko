@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="24dp">
 
     <!-- Course Selector -->
     <TextView
@@ -15,14 +15,15 @@
         android:textColor="#48169F"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
         android:id="@+id/spinnerCourses"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="366dp"
+        android:layout_height="49dp"
         android:layout_marginHorizontal="8dp"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,31 +81,41 @@
     <!-- Buttons -->
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/saveBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#167269"
+        android:minWidth="140dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:text="Save"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        app:cornerRadius="16dp"
+        app:icon="@drawable/save"
+        app:layout_constraintEnd_toStartOf="@id/cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gradeInputLayout" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/cancel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="72dp"
-        android:backgroundTint="#B71C1C"
+        android:layout_marginTop="56dp"
+        android:backgroundTint="#CC1654"
+        android:minWidth="140dp"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
         android:text="Cancel"
+        android:textAlignment="center"
         android:textColor="@android:color/white"
         app:cornerRadius="16dp"
+        app:icon="@drawable/cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/saveBtn"
-        app:layout_constraintTop_toBottomOf="@id/gradeInputLayout" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/saveBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="8dp"
-        android:backgroundTint="#167269"
-        android:text="Save"
-        android:textColor="@android:color/white"
-        app:cornerRadius="16dp"
-        app:layout_constraintEnd_toStartOf="@id/cancel"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/gradeInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
