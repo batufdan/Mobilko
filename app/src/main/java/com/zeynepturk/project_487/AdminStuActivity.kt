@@ -84,6 +84,10 @@ class AdminStuActivity : AppCompatActivity() {
         bindingAdminStu.addStuBtn.setOnClickListener {
             addItem()
         }
+
+        bindingAdminStu.backBtn.setOnClickListener{
+            finish()
+        }
     }
 
     private fun getData() {
