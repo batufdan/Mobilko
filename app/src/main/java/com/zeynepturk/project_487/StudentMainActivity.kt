@@ -4,26 +4,34 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.zeynepturk.project_487.adapter.CustomStudentRVAdapter
 import com.zeynepturk.project_487.databinding.ActivityStuMainBinding
+import com.zeynepturk.project_487.db.AdminStuViewModel
 import com.zeynepturk.project_487.db.MobilkoRoomDatabase
+import com.zeynepturk.project_487.db.StudentMainViewModel
+import com.zeynepturk.project_487.db.StudentMainViewModelFactory
 import com.zeynepturk.project_487.model.Courses
 import com.zeynepturk.project_487.model.CoursesTaken
 
 class StudentMainActivity : AppCompatActivity() {
     lateinit var bindingStu: ActivityStuMainBinding
-    lateinit var taken: LiveData<List<CoursesTaken>>
+    lateinit var taken: LiveData<MutableList<CoursesTaken>>
     lateinit var adapter: CustomStudentRVAdapter
     lateinit var customDialog: Dialog
+    lateinit var stuViewModel: StudentMainViewModel
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
         Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")
             .allowMainThreadQueries()
@@ -46,8 +54,8 @@ class StudentMainActivity : AppCompatActivity() {
         bindingStu.stuMail.text = stu.mail
         bindingStu.stuName.text = stu.name
 
-
-        taken = mobilkoDB.coursesTakenDao().getAllTakenById(stuID)
+        stuViewModel = ViewModelProvider(this, StudentMainViewModelFactory(application, stuID)).get(StudentMainViewModel::class.java)
+        taken = stuViewModel.readAllData
 
         taken.observe(this, Observer { coursesTakenList ->
             if (coursesTakenList != null) {
@@ -93,7 +101,7 @@ class StudentMainActivity : AppCompatActivity() {
         var btnOk : Button = customDialog.findViewById(R.id.button2)
         var btnCancel: Button = customDialog.findViewById(R.id.button3)
         var spinner: Spinner = customDialog.findViewById(R.id.spinner2)
-
+        var selectedCourse = ""
         val courses = mobilkoDB.coursesDao().getCodes()
         val taken = mobilkoDB.coursesTakenDao().getCourseCodesById(stuId)
 
@@ -110,6 +118,24 @@ class StudentMainActivity : AppCompatActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
 
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                selectedCourse = parent?.getItemAtPosition(position).toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+        }
+        btnOk.setOnClickListener {
+            var courseTaken = CoursesTaken(selectedCourse, stuId,0, 0)
+            stuViewModel.addTakenCourse(courseTaken)
+            Toast.makeText(this@StudentMainActivity, "$selectedCourse is added", Toast.LENGTH_SHORT).show()
+            customDialog.dismiss()
+        }
         btnCancel.setOnClickListener { customDialog.dismiss() }
         customDialog.show()
     }

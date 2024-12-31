@@ -24,7 +24,7 @@ import kotlinx.coroutines.withContext
 class OfficeHourActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOfficeHourBinding
     private val instructorList = mutableListOf<Instructor>()
-    lateinit var taken: LiveData<List<CoursesTaken>>
+    lateinit var taken: LiveData<MutableList<CoursesTaken>>
     private lateinit var adapter: CustomInstructorRecyclerViewAdapter
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
         Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")

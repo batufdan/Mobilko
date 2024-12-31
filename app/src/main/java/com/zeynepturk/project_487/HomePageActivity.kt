@@ -6,8 +6,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ReportFragment.Companion.reportFragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
@@ -17,6 +19,7 @@ import com.ctis487.workerjsondatabase.backgroundservice.CustomWorker
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.zeynepturk.project_487.databinding.ActivityHomePageBinding
+import com.zeynepturk.project_487.db.AdminStuViewModel
 import com.zeynepturk.project_487.db.MobilkoRoomDatabase
 import com.zeynepturk.project_487.model.Admin
 import com.zeynepturk.project_487.model.CoursesTaken
@@ -32,10 +35,12 @@ import java.util.Collections
 class HomePageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomePageBinding
     lateinit var students: ArrayList<Student>
+    lateinit var stuList: ArrayList<Student>
     lateinit var admins:  ArrayList<Admin>
     lateinit var instructors: List<Instructor>
     lateinit var coursesTakenList: ArrayList<CoursesTaken>
     lateinit var studentService: StudentService
+    lateinit var stuViewModel: AdminStuViewModel
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
         Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")
             .allowMainThreadQueries()
@@ -53,10 +58,10 @@ class HomePageActivity : AppCompatActivity() {
             .create(StudentService::class.java)
 
         students = ArrayList<Student>()
-
+        stuList = ArrayList<Student>()
         //clearData()    // Test datalarını temizlemek için
+        stuViewModel = ViewModelProvider(this).get(AdminStuViewModel::class.java)
         getData()
-
 
         binding.adminBtn.setOnClickListener {
             val enteredId = binding.studentIdInput.text.toString().trim()
@@ -88,7 +93,9 @@ class HomePageActivity : AppCompatActivity() {
                 showToast("Please fill in both fields!")
             }
 
-            val foundStudent = students.find {
+            Log.d("STULIST", stuList.toString())
+            val foundStudent = stuList.find {
+                Log.d("FOUND STU", it.id.toString() + it.pass.toString())
                 it.id == enteredId.toInt() && it.pass == enteredPass
             }
 
@@ -121,7 +128,7 @@ class HomePageActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Student>>, response: Response<List<Student>>) {
                 if (response.isSuccessful) {
                     Log.d("RESPONSE SUCCESSFUL", response.body().toString())
-                    students = (response.body() as ArrayList<Student>?)!!
+                    students = (response.body() as ArrayList<Student>)!!
                     Log.d("RESPONSE SUCCESSFUL", students.toString())
                 }
                 Log.d("RESPONSE BLA BLA", "ne yaptığını bilmiyoz")
@@ -164,8 +171,6 @@ class HomePageActivity : AppCompatActivity() {
 
     private fun getData(){
         prepareData()
-
-        //Farklılık olsun diye admini seçtim
         val gson = Gson()
         val adminsJson = gson.toJson(admins)
 
@@ -189,6 +194,9 @@ class HomePageActivity : AppCompatActivity() {
 
         mobilkoDB.coursesTakenDao().insertAllTakens(coursesTakenList)
         mobilkoDB.instructorDao().insertAllInstructors(instructors)
+        stuViewModel.readAllData.observe(this) { students ->
+            stuList.addAll(students)
+        }
     }
 
     private fun clearData() {

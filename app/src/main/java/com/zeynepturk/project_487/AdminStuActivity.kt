@@ -139,7 +139,7 @@ class AdminStuActivity : AppCompatActivity() {
         var attendance: TextView = customDialog.findViewById(R.id.attEdit)
         var grade: TextView = customDialog.findViewById(R.id.gradeEdit)
         var selectedCourse = ""
-        val taken: LiveData<List<CoursesTaken>> =
+        val taken: LiveData<MutableList<CoursesTaken>> =
             mobilkoDB.coursesTakenDao().getAllTakenById(stuID)
 
         taken.observe(this, Observer { coursesTakenList ->
