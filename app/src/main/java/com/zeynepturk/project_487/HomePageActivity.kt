@@ -214,10 +214,10 @@ class HomePageActivity : AppCompatActivity() {
             }
         })
 
-//        stuViewModel.readAllData.observe(this) { students ->
-//            stuList.addAll(students)
-//        }
-//        courseViewModel.addCourses(initialCourses)
+        stuViewModel.readAllData.observe(this) { students ->
+            stuList.addAll(students)
+        }
+
     }
 
     private fun clearData() {
