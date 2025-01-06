@@ -14,7 +14,7 @@
     <string name="select_office_hour">Select Office Hour</string>
     <string name="exam_schedules">Exam Schedule</string>
     <string name="account_entry">Bilkent University Account Entry</string>
-    <string name="enter_student_id">Enter Student ID</string>
+    <string name="enter_student_id">Enter ID</string>
     <string name="enter_password">Enter Password</string>
     <string name="login">Login</string>
     <string name="enter_verification_code">Enter Verification Code</string>
