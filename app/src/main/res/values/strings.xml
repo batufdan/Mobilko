@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project_487</string>
+    <string name="app_name">Mobilko</string>
     <string name="student_info">Student Info</string>
     <string name="student_info_text">Name: John Doe\nID: 123456\nEmail: john.doe@university.com</string>
     <string name="course_table">Course Table</string>
