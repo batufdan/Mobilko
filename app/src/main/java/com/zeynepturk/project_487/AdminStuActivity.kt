@@ -107,15 +107,20 @@ class AdminStuActivity : AppCompatActivity() {
         var cgpa: TextView = customDialog.findViewById(R.id.stuCgpaEdit)
         var btnAdd: Button = customDialog.findViewById(R.id.btnAdd)
         btnAdd.setOnClickListener {
-            var s = Student(
-                0,
-                pass.text.toString(),
-                name.text.toString(),
-                mail.text.toString(),
-                cgpa.text.toString().toDouble()
-            )
-            stuViewModel.addStudent(s)
-            customDialog.dismiss()
+            if(name.text.isEmpty() || pass.text.isEmpty() || mail.text.isEmpty() ||
+                cgpa.text.isEmpty()) {
+                Toast.makeText(this, "Please fill in all fields!", Toast.LENGTH_SHORT).show()
+            }else{
+                var s = Student(
+                    0,
+                    pass.text.toString(),
+                    name.text.toString(),
+                    mail.text.toString(),
+                    cgpa.text.toString().toDouble()
+                )
+                stuViewModel.addStudent(s)
+                customDialog.dismiss()
+            }
         }
         btnDialogClose.setOnClickListener(View.OnClickListener {
             customDialog.dismiss()
@@ -160,19 +165,22 @@ class AdminStuActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
         btnSave.setOnClickListener {
-            val coursesTaken = CoursesTaken(
-                selectedCourse,
-                stuID,
-                attendance.text.toString().toInt(),
-                grade.text.toString().toInt()
-            )
-            mobilkoDB.coursesTakenDao().updateTaken(coursesTaken)
-            Toast.makeText(this, "$selectedCourse is updated for $stuID with att = ${attendance.text} and grade = ${grade.text}", Toast.LENGTH_SHORT).show()
-            customDialog.dismiss()
+            if (attendance.text.isEmpty() || grade.text.isEmpty()){
+                Toast.makeText(this, "Please fill in all fields!", Toast.LENGTH_SHORT).show()
+            }else{
+                val coursesTaken = CoursesTaken(
+                    selectedCourse,
+                    stuID,
+                    attendance.text.toString().toInt(),
+                    grade.text.toString().toInt()
+                )
+                mobilkoDB.coursesTakenDao().updateTaken(coursesTaken)
+                Toast.makeText(this, "$selectedCourse is updated for $stuID with att = ${attendance.text} and grade = ${grade.text}", Toast.LENGTH_SHORT).show()
+                customDialog.dismiss()
+            }
         }
 
         btnClose.setOnClickListener { customDialog.dismiss() }
-
         customDialog.show()
     }
 

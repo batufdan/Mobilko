@@ -19,9 +19,6 @@ class AdminMainActivity : AppCompatActivity() {
         bindingAdmin = ActivityAdminMainBinding.inflate(layoutInflater)
         setContentView(bindingAdmin.root)
 
-//        val b = intent.extras
-//        val id = b?.getInt("adminID")
-
         bindingAdmin.btnStu.setOnClickListener {
             val intent = Intent(this, AdminStuActivity::class.java)
             startActivity(intent)
