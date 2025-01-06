@@ -44,9 +44,6 @@ class AdminCourseActivity : AppCompatActivity() {
 
         courseViewModel = ViewModelProvider(this).get(AdminCourseViewModel::class.java)
 
-        prepareData()
-
-
         courseViewModel.readAllData.observe(this) { courses ->
             courseAdapter.setData(courses)
         }
@@ -192,17 +189,5 @@ class AdminCourseActivity : AppCompatActivity() {
     }
 
 
-
-    fun prepareData() {
-        val initialCourses = listOf(
-            Courses("CTIS-487", "Mobile Application Development", "Leyla Sezer"),
-            Courses("CTIS-359", "Software Engineering Principles", "Cüneyt Sevgi"),
-            Courses("MATH-220", "Linear Algebra", "Ahmet Muhtar Güloğlu"),
-            Courses("COMD-358", "Professional Communication", "Özen Baş"),
-            Courses("CTIS-365", "Applied Data Analysis", "Seyid Amjad"),
-            Courses("HIST-200", "History of Turkey", "Kudret Emiroğlu")
-        )
-        courseViewModel.addCourses(initialCourses)
-    }
 
 }

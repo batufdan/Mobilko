@@ -19,9 +19,11 @@ import com.ctis487.workerjsondatabase.backgroundservice.CustomWorker
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.zeynepturk.project_487.databinding.ActivityHomePageBinding
+import com.zeynepturk.project_487.db.AdminCourseViewModel
 import com.zeynepturk.project_487.db.AdminStuViewModel
 import com.zeynepturk.project_487.db.MobilkoRoomDatabase
 import com.zeynepturk.project_487.model.Admin
+import com.zeynepturk.project_487.model.Courses
 import com.zeynepturk.project_487.model.CoursesTaken
 import com.zeynepturk.project_487.model.Instructor
 import com.zeynepturk.project_487.model.Student
@@ -41,6 +43,8 @@ class HomePageActivity : AppCompatActivity() {
     lateinit var coursesTakenList: ArrayList<CoursesTaken>
     lateinit var studentService: StudentService
     lateinit var stuViewModel: AdminStuViewModel
+    lateinit var initialCourses: List<Courses>
+    lateinit var courseViewModel: AdminCourseViewModel
     private val mobilkoDB: MobilkoRoomDatabase by lazy {
         Room.databaseBuilder(this, MobilkoRoomDatabase::class.java, "MobilkoDB")
             .allowMainThreadQueries()
@@ -59,9 +63,12 @@ class HomePageActivity : AppCompatActivity() {
 
         students = ArrayList<Student>()
         stuList = ArrayList<Student>()
-        //clearData()    // Test datalarını temizlemek için
+
+        // clearData()    // Test datalarını temizlemek için
         stuViewModel = ViewModelProvider(this).get(AdminStuViewModel::class.java)
+        courseViewModel = ViewModelProvider(this).get(AdminCourseViewModel::class.java)
         getData()
+
 
         binding.adminBtn.setOnClickListener {
             val enteredId = binding.studentIdInput.text.toString().trim()
@@ -120,7 +127,9 @@ class HomePageActivity : AppCompatActivity() {
     fun prepareData() {
         admins = ArrayList<Admin>()
         coursesTakenList = ArrayList<CoursesTaken>()
+
         val request = studentService.getStudents()
+
         request.enqueue(object : Callback<List<Student>> {
             override fun onFailure(call: Call<List<Student>>, t: Throwable) {
                 Log.d("FAIL JSON", t.message.toString())
@@ -129,9 +138,7 @@ class HomePageActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     Log.d("RESPONSE SUCCESSFUL", response.body().toString())
                     students = (response.body() as ArrayList<Student>)!!
-                    Log.d("RESPONSE SUCCESSFUL", students.toString())
                 }
-                Log.d("RESPONSE BLA BLA", "ne yaptığını bilmiyoz")
                 mobilkoDB.studentDao().insertAllStudent(students)
             }
         })
@@ -166,6 +173,15 @@ class HomePageActivity : AppCompatActivity() {
             Instructor(6, "Özen Baş", "Friday 10:30-11:20", "Taken", "ozenbas@bilkent.edu.tr", R.drawable.kiz3),
             Instructor(7, "Kudret Emiroğlu", "Wednesday 11:30-12:20", "Not Taken", "kudretemiroglu@bilkent.edu.tr", R.drawable.kudret_emir)
         )
+
+        initialCourses = listOf(
+            Courses("CTIS-487", "Mobile Application Development", "Leyla Sezer"),
+            Courses("CTIS-359", "Software Engineering Principles", "Cüneyt Sevgi"),
+            Courses("MATH-220", "Linear Algebra", "Ahmet Muhtar Güloğlu"),
+            Courses("COMD-358", "Professional Communication", "Özen Baş"),
+            Courses("CTIS-365", "Applied Data Analysis", "Seyid Amjad"),
+            Courses("HIST-200", "History of Turkey", "Kudret Emiroğlu")
+        )
     }
 
 
@@ -173,11 +189,17 @@ class HomePageActivity : AppCompatActivity() {
         prepareData()
         val gson = Gson()
         val adminsJson = gson.toJson(admins)
+        val instructorJson = gson.toJson(instructors)
+        val coursesTakenJson = gson.toJson(coursesTakenList)
+        val coursesJson = gson.toJson(initialCourses)
 
         val workRequest = OneTimeWorkRequest.Builder(CustomWorker::class.java)
             .setInputData(
                 Data.Builder()
                     .putString("admins", adminsJson)
+                    .putString("instructors", instructorJson)
+                    .putString("coursesTaken", coursesTakenJson)
+                    .putString("courses", coursesJson)
                     .build()
             )
             .build()
@@ -192,17 +214,18 @@ class HomePageActivity : AppCompatActivity() {
             }
         })
 
-        mobilkoDB.coursesTakenDao().insertAllTakens(coursesTakenList)
-        mobilkoDB.instructorDao().insertAllInstructors(instructors)
-        stuViewModel.readAllData.observe(this) { students ->
-            stuList.addAll(students)
-        }
+//        stuViewModel.readAllData.observe(this) { students ->
+//            stuList.addAll(students)
+//        }
+//        courseViewModel.addCourses(initialCourses)
     }
 
     private fun clearData() {
         // Student Table
         mobilkoDB.studentDao().deleteAllStudents()
         mobilkoDB.studentDao().resetAutoIncrement()
+        mobilkoDB.instructorDao().deleteAllInstructor()
+        mobilkoDB.coursesDao().deleteAllCourses()
         // CoursesTaken Table
         mobilkoDB.coursesTakenDao().deleteAllTakens()
     }
