@@ -33,7 +33,7 @@ class AdminMainActivity : AppCompatActivity() {
         }
 
         Glide.with(this)
-            .load(R.drawable.mobilko)
+            .load(R.drawable.blue_graduation_cap_icon)
             .circleCrop()
             .into(bindingAdmin.logoImage);
     }
