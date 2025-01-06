@@ -48,20 +48,6 @@ class CustomAdminCourseRecyclerViewAdapter(private val context: Context, private
         val fabUpdate: FloatingActionButton = itemView.findViewById(R.id.fabUpdate)
     }
 
-    fun addCourse(course: Courses) {
-        courses.add(course)
-        notifyItemInserted(courses.size - 1)
-    }
-
-
-    fun updateCourse(course: Courses) {
-        val index = courses.indexOfFirst { it.courseCode == course.courseCode }
-        if (index != -1) {
-            courses[index] = course
-            notifyItemChanged(index)
-        }
-    }
-
     fun getCourseAt(position: Int): Courses {
         return courses[position]
     }
