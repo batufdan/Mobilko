@@ -9,12 +9,27 @@
     tools:context=".AdminStuActivity">
 
 
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="31dp"
+        android:text="Search for a student or add a new one"
+        android:textColor="#CC1654"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/searchLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="80dp"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
@@ -39,7 +54,7 @@
         android:id="@+id/addStuBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#6200EE"
         android:text="Add Student"
         android:textColor="@android:color/white"
@@ -53,8 +68,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/studentListCard"
-        android:layout_width="377dp"
-        android:layout_height="382dp"
+        android:layout_width="380dp"
+        android:layout_height="443dp"
         android:layout_margin="16dp"
         android:backgroundTint="#FFFFFF"
         app:cardCornerRadius="16dp"
@@ -67,8 +82,8 @@
         <!-- Student List -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/stuList"
-            android:layout_width="match_parent"
-            android:layout_height="382dp"
+            android:layout_width="376dp"
+            android:layout_height="match_parent"
             android:background="@android:color/white"
             android:clipToPadding="false"
             android:padding="16dp" />
