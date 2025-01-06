@@ -77,18 +77,20 @@ class HomePageActivity : AppCompatActivity() {
             if (enteredId.isEmpty() || enteredPass.isEmpty()) {
                 showToast("Please fill in both fields!")
             }
-            val foundAdmin = admins.find {
-                it.id == enteredId.toInt() && it.pass == enteredPass
-            }
+            else{
+                val foundAdmin = admins.find {
+                    it.id == enteredId.toInt() && it.pass == enteredPass
+                }
 
-            if (foundAdmin != null) {
-                showToast("Welcome, ${foundAdmin.name}!")
-                val intent = Intent(this, AdminMainActivity::class.java)
-                intent.putExtra("adminId", it.id)
-                startActivity(intent)
-                finish()
-            } else {
-                showToast("Invalid ID or Password!")
+                if (foundAdmin != null) {
+                    showToast("Welcome, ${foundAdmin.name}!")
+                    val intent = Intent(this, AdminMainActivity::class.java)
+                    intent.putExtra("adminId", it.id)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    showToast("Invalid ID or Password!")
+                }
             }
         }
 
@@ -98,24 +100,24 @@ class HomePageActivity : AppCompatActivity() {
 
             if (enteredId.isEmpty() || enteredPass.isEmpty()) {
                 showToast("Please fill in both fields!")
-            }
-
-            Log.d("STULIST", stuList.toString())
-            val foundStudent = stuList.find {
-                Log.d("FOUND STU", it.id.toString() + it.pass.toString())
-                it.id == enteredId.toInt() && it.pass == enteredPass
-            }
-
-            if (foundStudent != null) {
-                showToast("Welcome, ${foundStudent.name}!")
-                Log.d("ENTERED ID", enteredId)
-                val intent = Intent(this, StudentMainActivity::class.java).apply {
-                    putExtra("STUDENT_ID", enteredId.toInt())
+            }else{
+                Log.d("STULIST", stuList.toString())
+                val foundStudent = stuList.find {
+                    Log.d("FOUND STU", it.id.toString() + it.pass.toString())
+                    it.id == enteredId.toInt() && it.pass == enteredPass
                 }
-                startActivity(intent)
-                finish()
-            } else {
-                showToast("Invalid ID or Password!")
+
+                if (foundStudent != null) {
+                    showToast("Welcome, ${foundStudent.name}!")
+                    Log.d("ENTERED ID", enteredId)
+                    val intent = Intent(this, StudentMainActivity::class.java).apply {
+                        putExtra("STUDENT_ID", enteredId.toInt())
+                    }
+                    startActivity(intent)
+                    finish()
+                } else {
+                    showToast("Invalid ID or Password!")
+                }
             }
         }
     }

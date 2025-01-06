@@ -41,13 +41,6 @@ class AdminStuActivity : AppCompatActivity() {
             .build()
     }
 
-//    private val images = listOf(
-//        R.drawable.kiz1,
-//        R.drawable.kiz2,
-//        R.drawable.erkek,
-//        R.drawable.kiz3
-//    )
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

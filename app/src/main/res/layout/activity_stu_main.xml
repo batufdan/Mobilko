@@ -14,6 +14,7 @@
             android:padding="16dp">
 
                 <!-- Student Info Section -->
+
                 <TextView
                     android:id="@+id/studentInfoTitle"
                     android:layout_width="match_parent"
@@ -119,7 +120,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/courseTable"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="178dp"
                     android:layout_marginBottom="16dp"
                     android:background="@android:color/white"
                     android:elevation="4dp"
@@ -133,8 +134,8 @@
                     android:layout_marginTop="16dp"
                     android:backgroundTint="#2B622D"
                     android:text="Office Hour"
-                    android:textStyle="bold"
                     android:textColor="@android:color/white"
+                    android:textStyle="bold"
                     app:cornerRadius="16dp" />
 
                 <com.google.android.material.button.MaterialButton
@@ -144,6 +145,19 @@
                     android:layout_marginTop="16dp"
                     android:backgroundTint="#2B622D"
                     android:text="Enroll Course"
+                    android:textColor="@android:color/white"
+                    android:textStyle="bold"
+                    app:cornerRadius="16dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/logoutBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="#2B622D"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="@string/logout"
+                    android:textAlignment="gravity"
                     android:textColor="@android:color/white"
                     android:textStyle="bold"
                     app:cornerRadius="16dp" />

@@ -15,9 +15,9 @@
         android:layout_marginTop="16dp"
         android:paddingBottom="12dp"
         android:text="@string/select_office_hour"
+        android:textColor="#3A1A74"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#3A1A74"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,17 +26,34 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/instructorRecycler"
-        android:layout_width="353dp"
-        android:layout_height="616dp"
+        android:layout_width="349dp"
+        android:layout_height="540dp"
         android:layout_margin="16dp"
         android:background="@android:color/white"
         android:elevation="4dp"
         android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/officeHourTitle"
-        app:layout_constraintVertical_bias="0.743" />
+        app:layout_constraintVertical_bias="0.175" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/backBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="27dp"
+        android:backgroundTint="#CC1654"
+        android:text="@string/back"
+        android:textColor="@android:color/white"
+        app:cornerRadius="16dp"
+        app:icon="@drawable/arrow_back"
+        app:iconPadding="8dp"
+        app:iconTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

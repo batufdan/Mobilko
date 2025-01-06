@@ -21,4 +21,6 @@
     <string name="verification_code">Verification Code</string>
     <string name="verify">Verify</string>
     <string name="back">Back</string>
+    <string name="courseDetail">Detail of Course</string>
+    <string name="logout">Logout\n</string>
 </resources>

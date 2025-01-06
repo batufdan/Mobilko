@@ -30,6 +30,11 @@ class AdminMainActivity : AppCompatActivity() {
         bindingAdmin.btnCourse.setOnClickListener {
             startActivity(Intent(this, AdminCourseActivity::class.java))
         }
+
+        bindingAdmin.btnLogout.setOnClickListener {
+            startActivity(Intent(this, HomePageActivity::class.java))
+        }
+
         Glide.with(this)
             .load(R.drawable.mobilko)
             .circleCrop()

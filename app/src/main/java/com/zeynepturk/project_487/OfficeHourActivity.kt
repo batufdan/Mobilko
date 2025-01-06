@@ -73,8 +73,12 @@ class OfficeHourActivity : AppCompatActivity() {
                     handleTakeClick(instructor) }
                 binding.instructorRecycler.layoutManager = LinearLayoutManager(this)
                 binding.instructorRecycler.adapter = adapter
+
                 }
         })
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun handleTakeClick(instructor: Instructor) {

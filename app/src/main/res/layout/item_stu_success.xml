@@ -10,22 +10,6 @@
     android:gravity="center_horizontal">
 
     <!-- Profile Image -->
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginBottom="16dp"
-        app:cardCornerRadius="60dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@android:color/white">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:contentDescription="Profile Picture"
-            tools:srcCompat="@tools:sample/avatars" />
-    </com.google.android.material.card.MaterialCardView>
 
     <!-- ID Text -->
     <TextView

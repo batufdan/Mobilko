@@ -90,13 +90,19 @@
         android:id="@+id/btnLogout"
         android:layout_width="193dp"
         android:layout_height="47dp"
+        android:layout_marginStart="109dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginEnd="109dp"
+        android:layout_marginBottom="107dp"
         android:backgroundTint="#4A4A4A"
         android:elevation="4dp"
         android:text="Logout"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:cornerRadius="16dp"
-        tools:layout_editor_absoluteX="109dp"
-        tools:layout_editor_absoluteY="498dp" />
+        app:layout_constraintBottom_toTopOf="@+id/footerText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnStu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

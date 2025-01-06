@@ -43,6 +43,9 @@ class CourseDetailActivity : AppCompatActivity() {
         bindingDetail.attendance.text = takenCourse?.attendance.toString()
         bindingDetail.grade.text = takenCourse?.courseGrade.toString()
         bindingDetail.instructor.text = inst
+        bindingDetail.backBtn.setOnClickListener {
+            finish()
+        }
 
     }
 }

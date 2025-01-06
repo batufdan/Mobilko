@@ -91,6 +91,10 @@ class StudentMainActivity : AppCompatActivity() {
         bindingStu.enrollBtn.setOnClickListener{
             createDialog(stuID)
         }
+        bindingStu.logoutBtn.setOnClickListener {
+            val intent = Intent(this, HomePageActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 
